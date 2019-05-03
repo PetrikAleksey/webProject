@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+.result_table {
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    /*width: 300px; !* Ширина таблицы *!*/
+    width: 100%;
+    position: relative;
+   }
+   
+   THEAD {
+    background: #454d55; /* Цвет фона ячейки */
+    /*text-align: centre; !* Выравнивание по левому краю *!*/
+    font-weight: bold;
+    color: #ffffff;
+   }
+   TBODY {
+    background: #ffffff; /* Цвет фона ячейки */
+    /*text-align: center; !* Выравнивание по левому краю *!*/
+   }
+    tbody tr:hover {
+        background: #848d95; /* Цвет фона при наведении */
+        color: #fff; /* Цвет текста при наведении */
+    }
+   TH, TD {
+    'border: 1px solid black; /* Параметры рамки */
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 12px; /* Поля вокруг текста */
+   }
+
+/*#myAlert{*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    !*transform: translate(-20%);*!*/
+/*}*/
+
+#topButton{
+    background: #454d55;
+    width: 100%;
+    float: right;
+}
+.buttonAdd{
+    /*margin-left: 10%;*/
+}
+
+#logo{
+    text-align: center;
+    font-size: 24pt;
+    width: 10%;
+    float: left;
+    /*margin-top: 0.2%;*/
+    color: white;
+    /*margin-left: 3px;*/
+    /*margin-right: 2%;*/
+}
+
+#leftButton{
+    background: #454d55;
+    width: 10%;
+    height: 1000px;
+    /*'height: 100%;*/
+    float: left;
+}
+#content{
+    width: 90%;
+    float: right;
+}
+
+#result_text{
+    padding-top: 10px;
+}
+
+.search{
+    height: 40px;
+    width: 60.2%;
+}
+
+.topButton{
+    height:40px;
+    /*width:180px;*/
+    width: 9.5%;
+    text-align:center;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    /*color: white;*/
+    /*background-color: #4CAF50;*/
+    /*border-color: #4CAF50;*/
+}
+
+.leftButton{
+    height:40px;
+    /*width:180px;*/
+    width: 96%;
+    text-align:center;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.vertical-menu {
+    width: 100%;
+    color: white;
+}
+
+.vertical-menu a {
+    background-color: #454d55;;
+    color: white;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #5e666e;
+    color: white;
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.selectedToDelete{
+    background: #848d95; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+}
+
+.label-modal{
+    padding-top: 15px;
+}
