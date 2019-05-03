@@ -22,6 +22,7 @@ public class Worker implements Serializable {
     private String fio;
 
     @Column(name = "position")
+    @Enumerated(EnumType.STRING)
     private Position position;
 
     @Column(name = "phone")

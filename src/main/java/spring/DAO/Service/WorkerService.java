@@ -10,4 +10,5 @@ public interface WorkerService {
     Worker editWorker(Worker worker);
     List<Worker> getAll();
     void deleteSelected(List<Worker> listWorker);
+    List<Worker> searchWorker(String str);
 }

@@ -38,4 +38,9 @@ public class WorkerServiceImpl implements WorkerService {
     public void deleteSelected(List<Worker> listWorker) {
         workerRepository.deleteAll(listWorker);
     }
+
+    @Override
+    public List<Worker> searchWorker(String str) {
+        return workerRepository.findAllByFioLike(str);
+    }
 }

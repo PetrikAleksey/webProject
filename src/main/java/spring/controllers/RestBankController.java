@@ -12,7 +12,7 @@ import spring.DAO.Service.BankService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/rest")
+@RequestMapping(value = "/restBank")
 public class RestBankController {
 
     @Autowired

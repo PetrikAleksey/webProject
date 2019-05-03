@@ -556,14 +556,41 @@ $('.buttonEdit').on('click',function () {
 $('.search').on('input',function () {
     var searchStr = $('.search').val();
     var json = {};
-    json.name = searchStr;
-    if(searchStr === ""){
-        sendAjax('loadBank', 'GET', "", successLoad);
+    if(searchStr === null || searchStr === ""){
+        if($("#bank").hasClass("active") === true) {
+            sendAjax('loadBank', 'GET', "", successLoad);
+        }
+        else if ($("#worker").hasClass("active") === true) {
+            sendAjax('loadWorker', 'GET', "", successLoad);
+        }
+        else if ($("#client").hasClass("active") === true) {
+            sendAjax('loadClient', 'GET', "", successLoad);
+        }
+        else if ($("#account").hasClass("active") === true) {
+            sendAjax('loadBankAccount', 'GET', "", successLoad);
+        }
     }
     else {
         console.log(searchStr);
-        sendAjax('rest/searchBank', 'POST', JSON.stringify(json), successLoad);
-
+        if($("#bank").hasClass("active") === true) {
+            json.name = searchStr;
+            sendAjax('restBank/searchBank', 'POST', JSON.stringify(json), successLoad);
+        }
+        else if ($("#worker").hasClass("active") === true) {
+            json.fio = searchStr;
+            var bank = {};
+            json.position = searchStr;
+            json.phone = searchStr;
+            bank.name = searchStr;
+            json.bank = bank;
+            sendAjax('restWorker/searchWorker', 'POST', JSON.stringify(json), successLoad);
+        }
+        else if ($("#client").hasClass("active") === true) {
+            sendAjax('restClient/searchClient', 'POST', JSON.stringify(json), successLoad);
+        }
+        else if ($("#account").hasClass("active") === true) {
+            sendAjax('restBankAccount/searchBankAccount', 'POST', JSON.stringify(json), successLoad);
+        }
     }
 });
 
@@ -718,11 +745,6 @@ function addContent() {
             input = "";
         }
         else if($("#account").hasClass("active") === true) {
-            //id
-            //login
-            //password
-            //currency
-            //client
             input = "<label for=\"login\">Логин</label>" +
                 "<input  class=\"form-control\"  id=\"login\" name=\"login\" value='' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
             input += "<label class='label-modal' for=\"password\">Пароль</label>" +
