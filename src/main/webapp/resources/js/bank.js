@@ -562,8 +562,8 @@ $('.search').on('input',function () {
     }
     else {
         console.log(searchStr);
-        sendAjax('rest/searchBank', 'POST', json, successLoad);
-        //sendAjax('rest/searchBank', 'POST', searchStr, successLoad);
+        sendAjax('rest/searchBank', 'POST', JSON.stringify(json), successLoad);
+
     }
 });
 

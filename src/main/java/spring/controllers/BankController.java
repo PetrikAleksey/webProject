@@ -48,21 +48,25 @@ public class BankController {
 	@ResponseBody
 	public String loadBank() {
 		List<Bank> list = bankService.getAll();
-
+//		list.forEach(System.out::println);
+//		for(Bank bank: list){
+//			System.out.println(bank.getId());
+//			System.out.println(bank.getName());
+//			System.out.println(bank.getWorkers());
 //		}
 		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
 		return gson.toJson(list);
 	}
 
-	/*@RequestMapping(value="/searchBank", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
-	@ResponseBody
-	public String searchBank(@RequestBody String name) {
-		System.out.println(name);
-		List<Bank> list = bankService.searchBank(name);
-		list.forEach(System.out::println);
-		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
-		return gson.toJson(list);
-	}*/
+//	@RequestMapping(value="/searchBank", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
+//	@ResponseBody
+//	public String searchBank(@RequestBody String name) {
+//		System.out.println(name);
+//		List<Bank> list = bankService.searchBank(name);
+//		list.forEach(System.out::println);
+//		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
+//		return gson.toJson(list);
+//	}
 
 	 @RequestMapping(value = "/bank", method = RequestMethod.GET)
 	 public String bank(Locale locale, Model model) {
