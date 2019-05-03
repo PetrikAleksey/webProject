@@ -48,11 +48,7 @@ public class BankController {
 	@ResponseBody
 	public String loadBank() {
 		List<Bank> list = bankService.getAll();
-//		list.forEach(System.out::println);
-//		for(Bank bank: list){
-//			System.out.println(bank.getId());
-//			System.out.println(bank.getName());
-//			System.out.println(bank.getWorkers());
+
 //		}
 		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
 		return gson.toJson(list);
