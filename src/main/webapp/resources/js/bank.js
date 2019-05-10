@@ -208,16 +208,17 @@ function addHeadAndBody() {
     $("#result_table_id tbody").remove();
     $("#result_table_id thead").remove();
 
-    var head = " \t\t\t<thead>\n" +
-        "            <tr>\n" +
-        "                <td class=\"td-first\">\n" +
-        "                    <div class=\"custom-control custom-checkbox\">\n" +
-        "                        <input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
-        "                        <label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
-        "                    </div>\n" +
-        "                </td>\n" +
-        "            </tr>\n" +
-        "            </thead>";
+    // var head = " \t\t\t<thead>\n" +
+    //     "            <tr>\n" +
+    //     "                <th class=\"td-first\">\n" +
+    //     "                    <div class=\"custom-control custom-checkbox\">\n" +
+    //     "                        <input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
+    //     "                        <label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
+    //     "                    </div>\n" +
+    //     "                </th>\n" +
+    //     "            </tr>\n" +
+    //     "            </thead>";
+    var head = "<thead><tr></tr></thead>";
     var body = "<tbody id = \"result_tbody_id\" class = \"result_tbody\"></tbody>";
     var column = "";
 
@@ -257,8 +258,8 @@ function addHeadAndBody() {
     });
 
     if($("#bank").hasClass("active") === true) {
-        column = "<td class=\"td-next\">ID</td>";
-        column += "<td class=\"td-next\">Название банка</td>";
+        column = "<th class=\"td-next\">ID</th>";
+        column += "<th class=\"td-next\">Name</th>";
     }
     else if($("#worker").hasClass("active") === true) {
         column = "<td class=\"td-next\">ID</td>";
@@ -294,7 +295,7 @@ function successLoad(data) {
             '  <label class="custom-control-label" for="customCheck'+value.id+'"></label>\n' +
             '</div></td>');
         var column1 = $('<td class="td-next"></td>').text(value.id).addClass('tdId');
-        row.append(column0);
+        //row.append(column0);
         row.append(column1);
         if($("#bank").hasClass("active") === true) {
             var column2 = $('<td class="td-next"></td>').text(value.name).addClass('tdName');
@@ -802,5 +803,4 @@ function closeModel() {
     $('.buttonAdd').removeClass("active");
     console.log("Close Modal");
 }
-
 //-----------------------------------------------//

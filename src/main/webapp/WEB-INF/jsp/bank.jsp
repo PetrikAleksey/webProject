@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <jsp:include page="headConfig.jsp" />
 <title>CRUD Bank</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link type="text/css" href="<c:url value='/resources/css/style.css' />" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
 <%--	<script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>--%>
