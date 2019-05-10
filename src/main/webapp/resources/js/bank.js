@@ -553,6 +553,8 @@ $('.buttonEdit').on('click',function () {
     $('.buttonEdit').addClass("active");
     addContent();
 });
+
+//---------------------Поиск---------------------//
 $('.search').on('input',function () {
     var searchStr = $('.search').val();
     var json = {};
@@ -593,6 +595,7 @@ $('.search').on('input',function () {
         }
     }
 });
+//-----------------------------------------------//
 
 // $(document).ready(function() {
 // 	$("#phone").mask("+375-99-999-99-99");

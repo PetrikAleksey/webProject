@@ -21,6 +21,7 @@
  		<input type="button" class="btn btn-success topButton buttonAdd" data-toggle='modal' data-target="#exampleModal" value="Добавить">
 		<input type="button" disabled class="btn btn-success topButton buttonDelete" value="Удалить" onclick="doAllSelectedDelete()">
 		<input type="button" disabled class="btn btn-success topButton buttonEdit" data-toggle='modal' data-target='#exampleModal' value="Изменить">
+        <input type="button" class="btn btn-success topButton buttonSearch" data-toggle='modal' data-target='#exampleModal' value="Поиск">
 		<input type="search" class = "search" name="search" placeholder="Поиск">
 	</div>
 	<div id="leftButton">
@@ -37,6 +38,7 @@
  	</div>
 	<!-- Модальное окно -->
 	<div class="addContent"></div>
+    <div class="dialogSearch"></div>
 </body>
 <%--<script>--%>
 <%--	$(document).ready(function(){--%>
