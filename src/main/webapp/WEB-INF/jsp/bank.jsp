@@ -7,7 +7,8 @@
 <meta charset="utf-8">
 <jsp:include page="headConfig.jsp" />
 <title>CRUD Bank</title>
-	<link type="text/css" href="<c:url value='/resources/css/style.css' />" rel="stylesheet" />
+    <link type="text/css" href="<c:url value='/resources/css/style.css' />" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
 <%--	<script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>--%>
 <%--	<script src="${pageContext.request.contextPath}/resources/js/bank.js" type="text/javascript"></script>--%>
 </head>
@@ -33,7 +34,7 @@
 		</div>
 	</div>
  	<div id="content">
- 		<table id = "result_table_id" class = "result_table">
+ 		<table id = "result_table_id" class = "result_table display">
  		</table>
  	</div>
 	<!-- Модальное окно -->
@@ -48,4 +49,8 @@
 <%--	});--%>
 <%--</script>--%>
 <script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script>$(document).ready( function () {
+    $('#result_table_id').DataTable();
+} );</script>
 </html>

@@ -29,6 +29,11 @@ public class DemoController {
 		return "demoModal";
 	}
 
+	@RequestMapping(value = "/testDataTable", method = RequestMethod.GET)
+	public String testDataTable(Model model) {
+		return "testDataTable";
+	}
+
 	
 	@PostMapping(path = "/registration")
 	public ModelAndView registration(@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname) {

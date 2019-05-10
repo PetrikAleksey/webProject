@@ -556,7 +556,21 @@ $('.buttonEdit').on('click',function () {
 
 //---------------------Поиск---------------------//
 function doSearch(){
-    var searchBankName = $('.search').val();
+    var json = {};
+    if($("#bank").hasClass("active") === true) {
+        var searchBankName = $('#name_bank').val();
+        json.name = searchBankName;
+        sendAjax('restBank/searchBank', 'POST', JSON.stringify(json), successLoad);
+    }
+    else if ($("#worker").hasClass("active") === true) {
+        //sendAjax('loadWorker', 'GET', "", successLoad);
+    }
+    else if ($("#client").hasClass("active") === true) {
+        //sendAjax('loadClient', 'GET', "", successLoad);
+    }
+    else if ($("#account").hasClass("active") === true) {
+        //sendAjax('loadBankAccount', 'GET', "", successLoad);
+    }
 }
 
 
@@ -788,4 +802,5 @@ function closeModel() {
     $('.buttonAdd').removeClass("active");
     console.log("Close Modal");
 }
+
 //-----------------------------------------------//
