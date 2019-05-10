@@ -807,7 +807,7 @@ function initTable(tableId,data,cols){
         data : data,
         rowId: "id",
         aoColumns: [
-            {"defaultContent" : '<input type="checkbox" autocomplete="off">'},
+            {"defaultContent" : '<input type="checkbox" autocomplete="off">', "sTitle": '<input type="checkbox" autocomplete="off">'},
             { "sTitle": "id", "mData": "id"},
             { "sTitle": "name", "mData": "name" }
         ]
