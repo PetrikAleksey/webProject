@@ -24,7 +24,7 @@
 		<input type="button" disabled class="btn btn-success topButton buttonDelete" value="Удалить" onclick="doAllSelectedDelete()">
 		<input type="button" disabled class="btn btn-success topButton buttonEdit" data-toggle='modal' data-target='#exampleModal' value="Изменить">
         <input type="button" class="btn btn-success topButton buttonSearch" data-toggle='modal' data-target='#exampleModal' value="Поиск">
-		<input type="search" class = "search" name="search" placeholder="Поиск">
+<%--		<input type="search" class = "search" name="search" placeholder="Поиск">--%>
 	</div>
 	<div id="leftButton">
 		<div class="vertical-menu">
@@ -35,12 +35,12 @@
 		</div>
 	</div>
  	<div id="content">
- 		<table id = "result_table_id" class = "result_table display">
+ 		<table id = "result_table_id" class = "table">
+			<tbody></tbody>
  		</table>
  	</div>
 	<!-- Модальное окно -->
 	<div class="addContent"></div>
-    <div class="dialogSearch"></div>
 </body>
 <%--<script>--%>
 <%--	$(document).ready(function(){--%>
@@ -49,9 +49,9 @@
 <%--		});--%>
 <%--	});--%>
 <%--</script>--%>
-<script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-<script>$(document).ready( function () {
-    $('#result_table_id').DataTable();
-} );</script>
+<script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>
+<%--<script>$(document).ready( function () {--%>
+<%--    $('#result_table_id').DataTable();--%>
+<%--} );</script>--%>
 </html>

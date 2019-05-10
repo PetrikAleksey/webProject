@@ -208,16 +208,6 @@ function addHeadAndBody() {
     $("#result_table_id tbody").remove();
     $("#result_table_id thead").remove();
 
-    // var head = " \t\t\t<thead>\n" +
-    //     "            <tr>\n" +
-    //     "                <th class=\"td-first\">\n" +
-    //     "                    <div class=\"custom-control custom-checkbox\">\n" +
-    //     "                        <input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
-    //     "                        <label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
-    //     "                    </div>\n" +
-    //     "                </th>\n" +
-    //     "            </tr>\n" +
-    //     "            </thead>";
     var head = "<thead><tr></tr></thead>";
     var body = "<tbody id = \"result_tbody_id\" class = \"result_tbody\"></tbody>";
     var column = "";
@@ -287,56 +277,57 @@ function addHeadAndBody() {
 }
 
 function successLoad(data) {
-    addHeadAndBody();
-    $.each( data, function( key, value ) {
-        var row = $('<tr id = tr'+value.id+'></tr>');
-        var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
-            '  <input type="checkbox" class="custom-control-input" id="customCheck'+value.id+'"/>\n' +
-            '  <label class="custom-control-label" for="customCheck'+value.id+'"></label>\n' +
-            '</div></td>');
-        var column1 = $('<td class="td-next"></td>').text(value.id).addClass('tdId');
-        //row.append(column0);
-        row.append(column1);
-        if($("#bank").hasClass("active") === true) {
-            var column2 = $('<td class="td-next"></td>').text(value.name).addClass('tdName');
-            row.append(column2);
-        }
-        else if($("#worker").hasClass("active") === true) {
-            var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
-            var column3 = $('<td class="td-next" id="'+value.positionObjName+'"></td>').text(value.position).addClass('tdPosition');
-            var column4 = $('<td class="td-next"></td>').text(value.phone).addClass('tdPhone');
-            var column5 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
-            row.append(column2);
-            row.append(column3);
-            row.append(column4);
-            row.append(column5);
-        }
-        else if($("#client").hasClass("active") === true) {
-            var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
-            var column3 = $('<td class="td-next"></td>').text(value.phoneNumber).addClass('tdPhoneNumber');
-            var column4 = $('<td class="td-next"></td>').text(value.address).addClass('tdAddress');
-            var column5 = $('<td class="td-next"></td>').text(value.email).addClass('tdEmail');
-            var column6 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
-            row.append(column2);
-            row.append(column3);
-            row.append(column4);
-            row.append(column5);
-            row.append(column6);
-        }
-        else if($("#account").hasClass("active") === true) {
-            var column2 = $('<td class="td-next"></td>').text(value.login).addClass('tdLogin');
-            var column3 = $('<td class="td-next"></td>').text(value.password).addClass('tdPassword');
-            var column4 = $('<td class="td-next"></td>').text(value.currency).addClass('tdCurrency');
-            var column5 = $('<td class="td-next" id="'+value.clientId+'"></td>').text(value.clientFIO).addClass('tdClient');
-            row.append(column2);
-            row.append(column3);
-            row.append(column4);
-            row.append(column5);
-        }
-        $("#result_tbody_id").append(row);
-        addListeners(value);
-    });
-    console.log("Load");
+    initTable("result_table_id",data,data);
+    // addHeadAndBody();
+    // $.each( data, function( key, value ) {
+    //     var row = $('<tr id = tr'+value.id+'></tr>');
+    //     var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
+    //         '  <input type="checkbox" class="custom-control-input" id="customCheck'+value.id+'"/>\n' +
+    //         '  <label class="custom-control-label" for="customCheck'+value.id+'"></label>\n' +
+    //         '</div></td>');
+    //     var column1 = $('<td class="td-next"></td>').text(value.id).addClass('tdId');
+    //     //row.append(column0);
+    //     row.append(column1);
+    //     if($("#bank").hasClass("active") === true) {
+    //         var column2 = $('<td class="td-next"></td>').text(value.name).addClass('tdName');
+    //         row.append(column2);
+    //     }
+    //     else if($("#worker").hasClass("active") === true) {
+    //         var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
+    //         var column3 = $('<td class="td-next" id="'+value.positionObjName+'"></td>').text(value.position).addClass('tdPosition');
+    //         var column4 = $('<td class="td-next"></td>').text(value.phone).addClass('tdPhone');
+    //         var column5 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
+    //         row.append(column2);
+    //         row.append(column3);
+    //         row.append(column4);
+    //         row.append(column5);
+    //     }
+    //     else if($("#client").hasClass("active") === true) {
+    //         var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
+    //         var column3 = $('<td class="td-next"></td>').text(value.phoneNumber).addClass('tdPhoneNumber');
+    //         var column4 = $('<td class="td-next"></td>').text(value.address).addClass('tdAddress');
+    //         var column5 = $('<td class="td-next"></td>').text(value.email).addClass('tdEmail');
+    //         var column6 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
+    //         row.append(column2);
+    //         row.append(column3);
+    //         row.append(column4);
+    //         row.append(column5);
+    //         row.append(column6);
+    //     }
+    //     else if($("#account").hasClass("active") === true) {
+    //         var column2 = $('<td class="td-next"></td>').text(value.login).addClass('tdLogin');
+    //         var column3 = $('<td class="td-next"></td>').text(value.password).addClass('tdPassword');
+    //         var column4 = $('<td class="td-next"></td>').text(value.currency).addClass('tdCurrency');
+    //         var column5 = $('<td class="td-next" id="'+value.clientId+'"></td>').text(value.clientFIO).addClass('tdClient');
+    //         row.append(column2);
+    //         row.append(column3);
+    //         row.append(column4);
+    //         row.append(column5);
+    //     }
+    //     $("#result_tbody_id").append(row);
+    //     addListeners(value);
+    // });
+    // console.log("Load");
 }
 //-----------------------------------------------//
 
@@ -803,4 +794,30 @@ function closeModel() {
     $('.buttonAdd').removeClass("active");
     console.log("Close Modal");
 }
+
+function initTable(tableId,data,cols){
+    var table = $('#'+tableId).DataTable({
+        "columnDefs": [
+            { "width": "5%", orderable: false,  "className": "text-center", "targets": 0}
+        ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        data : data,
+        rowId: "id",
+        aoColumns: [
+            {"defaultContent" : '<input type="checkbox" autocomplete="off">'},
+            { "sTitle": "id", "mData": "id"},
+            { "sTitle": "name", "mData": "name" }
+        ]
+    });
+
+    // $('#'+tableId+' tbody').on( 'click', 'tr', function () {
+    //     $(this).toggleClass('selected');
+    // });
+
+    return table;
+}
+
 //-----------------------------------------------//
