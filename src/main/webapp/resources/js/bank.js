@@ -555,6 +555,11 @@ $('.buttonEdit').on('click',function () {
 });
 
 //---------------------Поиск---------------------//
+function doSearch(){
+    var searchBankName = $('.search').val();
+}
+
+
 $('.search').on('input',function () {
     var searchStr = $('.search').val();
     var json = {};
@@ -630,7 +635,10 @@ function addContent() {
             doEdit();
         } else if($('.buttonAdd').hasClass("active") === true) {
             doAdd();
+        } else if($('.buttonSearch').hasClass("active") === true) {
+            doSearch();
         }
+
     });
     var input = "";
     var nameModal = "";
@@ -640,7 +648,7 @@ function addContent() {
         console.log("Изменить");
         var tr = $('.selectedToEdit').children();
         nameModal = "Изменить";
-        nameButton = "Сохранить";
+        nameButton = "Сохранить изменения";
         $('#exampleModalLabel').text(nameModal);
         $('#saveModified').text(nameButton);
         if($("#bank").hasClass("active") === true) {
@@ -708,10 +716,16 @@ function addContent() {
             sendAjax('loadClient', 'GET', "", successlistClient);
             input = "";
         }
-    } else if($('.buttonAdd').hasClass("active") === true) {
-        console.log("Добавить");
-        nameModal = "Добавление";
-        nameButton = "Добавить";
+    } else if($('.buttonAdd').hasClass("active") === true || $('.buttonSearch').hasClass("active") === true) {
+        if($('.buttonAdd').hasClass("active") === true){
+            console.log("Добавить");
+            nameModal = "Добавление";
+            nameButton = "Добавить";
+        }else if ($('.buttonSearch').hasClass("active") === true){
+            console.log("Поиск");
+            nameModal = "Поиск";
+            nameButton = "Найти";
+        }
         if($("#bank").hasClass("active") === true) {
             //var name = "";
             input += "<label for=\"name_bank\">Название банка</label>" +
