@@ -546,68 +546,6 @@ $('.buttonEdit').on('click',function () {
     addContent();
 });
 
-//---------------------Поиск---------------------//
-function doSearch(){
-    var json = {};
-    if($("#bank").hasClass("active") === true) {
-        var searchBankName = $('#name_bank').val();
-        json.name = searchBankName;
-        sendAjax('restBank/searchBank', 'POST', JSON.stringify(json), successLoad);
-    }
-    else if ($("#worker").hasClass("active") === true) {
-        //sendAjax('loadWorker', 'GET', "", successLoad);
-    }
-    else if ($("#client").hasClass("active") === true) {
-        //sendAjax('loadClient', 'GET', "", successLoad);
-    }
-    else if ($("#account").hasClass("active") === true) {
-        //sendAjax('loadBankAccount', 'GET', "", successLoad);
-    }
-}
-
-
-$('.search').on('input',function () {
-    var searchStr = $('.search').val();
-    var json = {};
-    if(searchStr === null || searchStr === ""){
-        if($("#bank").hasClass("active") === true) {
-            sendAjax('loadBank', 'GET', "", successLoad);
-        }
-        else if ($("#worker").hasClass("active") === true) {
-            sendAjax('loadWorker', 'GET', "", successLoad);
-        }
-        else if ($("#client").hasClass("active") === true) {
-            sendAjax('loadClient', 'GET', "", successLoad);
-        }
-        else if ($("#account").hasClass("active") === true) {
-            sendAjax('loadBankAccount', 'GET', "", successLoad);
-        }
-    }
-    else {
-        console.log(searchStr);
-        if($("#bank").hasClass("active") === true) {
-            json.name = searchStr;
-            sendAjax('restBank/searchBank', 'POST', JSON.stringify(json), successLoad);
-        }
-        else if ($("#worker").hasClass("active") === true) {
-            json.fio = searchStr;
-            var bank = {};
-            json.position = searchStr;
-            json.phone = searchStr;
-            bank.name = searchStr;
-            json.bank = bank;
-            sendAjax('restWorker/searchWorker', 'POST', JSON.stringify(json), successLoad);
-        }
-        else if ($("#client").hasClass("active") === true) {
-            sendAjax('restClient/searchClient', 'POST', JSON.stringify(json), successLoad);
-        }
-        else if ($("#account").hasClass("active") === true) {
-            sendAjax('restBankAccount/searchBankAccount', 'POST', JSON.stringify(json), successLoad);
-        }
-    }
-});
-//-----------------------------------------------//
-
 // $(document).ready(function() {
 // 	$("#phone").mask("+375-99-999-99-99");
 // });
@@ -796,9 +734,13 @@ function closeModel() {
 }
 
 function initTable(tableId,data,cols){
+    var checkbox ="<div class=\"custom-control custom-checkbox\">\n" +
+        "<input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
+        "<label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
+        "</div>\n";
     var table = $('#'+tableId).DataTable({
         "columnDefs": [
-            { "width": "5%", orderable: false,  "className": "text-center", "targets": 0}
+            { "width": "5%", margin : "1% 1% 1% 1%",orderable: false,  "className": "text-center", "targets": 0}
         ],
         select: {
             style:    'os',
@@ -807,9 +749,10 @@ function initTable(tableId,data,cols){
         data : data,
         rowId: "id",
         aoColumns: [
-            {"defaultContent" : '<input type="checkbox" autocomplete="off">', "sTitle": '<input type="checkbox" autocomplete="off">'},
-            { "sTitle": "id", "mData": "id"},
-            { "sTitle": "name", "mData": "name" }
+            //{"defaultContent" : '<input type="checkbox" autocomplete="off">', "sTitle": '<input type="checkbox" autocomplete="off">'},
+            {"defaultContent" : checkbox, "sTitle": checkbox},
+            { "sTitle": "ID", "mData": "id"},
+            { "sTitle": "Банк", "mData": "name" }
         ]
     });
 
