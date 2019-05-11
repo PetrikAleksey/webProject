@@ -13,6 +13,7 @@ function sendAjax(url,type,data,callback) {
 }
 //------------------Добавить---------------------//
 function doAdd() {
+
     if($("#bank").hasClass("active") === true) {
         var newNameBank = $("#name_bank").val();
         closeModel();
@@ -73,53 +74,63 @@ function doAdd() {
 }
 
 function successAdd(data){
-    var row = $('<tr id = tr'+data.id+'></tr>');
-    var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
-        '  <input type="checkbox" class="custom-control-input" id="customCheck'+data.id+'"/>\n' +
-        '  <label class="custom-control-label" for="customCheck'+data.id+'"></label>\n' +
-        '</div></td>');
-    var column1 = $('<td class="td-next"></td>').text(data.id).addClass('tdId');
-    row.append(column0);
-    row.append(column1);
-    if($("#bank").hasClass("active") === true) {
-        var column2 = $('<td class="td-next"></td>').text(data.name).addClass('tdName');
-        row.append(column2);
-    }
-    else if($("#worker").hasClass("active") === true) {
-        var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
-        var column3 = $('<td class="td-next" id ="'+data.positionObjName+'"></td>').text(data.position).addClass('tdPosition');
-        var column4 = $('<td class="td-next"></td>').text(data.phone).addClass('tdPhone');
-        var column5 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
-        row.append(column2);
-        row.append(column3);
-        row.append(column4);
-        row.append(column5);
-    }
-    else if($("#client").hasClass("active") === true) {
-        //console.log(data);
-        var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
-        var column3 = $('<td class="td-next"></td>').text(data.phoneNumber).addClass('tdPhoneNumber');
-        var column4 = $('<td class="td-next"></td>').text(data.address).addClass('tdAddress');
-        var column5 = $('<td class="td-next"></td>').text(data.email).addClass('tdEmail');
-        var column6 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
-        row.append(column2);
-        row.append(column3);
-        row.append(column4);
-        row.append(column5);
-        row.append(column6);
-    }
-    else if($("#account").hasClass("active") === true) {
-        var column2 = $('<td class="td-next"></td>').text(data.login).addClass('tdLogin');
-        var column3 = $('<td class="td-next"></td>').text(data.password).addClass('tdPassword');
-        var column4 = $('<td class="td-next"></td>').text(data.currency).addClass('tdCurrency');
-        var column5 = $('<td class="td-next" id ="'+data.clientId+'" ></td>').text(data.clientFIO).addClass('tdClient');
-        row.append(column2);
-        row.append(column3);
-        row.append(column4);
-        row.append(column5);
-    }
-    $("#result_tbody_id").append(row);
-    addListeners(data);
+    // var row = $('<tr id = tr'+data.id+'></tr>');
+    // var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
+    //     '  <input type="checkbox" class="custom-control-input" id="customCheck'+data.id+'"/>\n' +
+    //     '  <label class="custom-control-label" for="customCheck'+data.id+'"></label>\n' +
+    //     '</div></td>');
+    // var column1 = $('<td class="td-next"></td>').text(data.id).addClass('tdId');
+    // row.append(column0);
+    // row.append(column1);
+    // if($("#bank").hasClass("active") === true) {
+    //     var column2 = $('<td class="td-next"></td>').text(data.name).addClass('tdName');
+    //     row.append(column2);
+    // }
+    // else if($("#worker").hasClass("active") === true) {
+    //     var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
+    //     var column3 = $('<td class="td-next" id ="'+data.positionObjName+'"></td>').text(data.position).addClass('tdPosition');
+    //     var column4 = $('<td class="td-next"></td>').text(data.phone).addClass('tdPhone');
+    //     var column5 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
+    //     row.append(column2);
+    //     row.append(column3);
+    //     row.append(column4);
+    //     row.append(column5);
+    // }
+    // else if($("#client").hasClass("active") === true) {
+    //     //console.log(data);
+    //     var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
+    //     var column3 = $('<td class="td-next"></td>').text(data.phoneNumber).addClass('tdPhoneNumber');
+    //     var column4 = $('<td class="td-next"></td>').text(data.address).addClass('tdAddress');
+    //     var column5 = $('<td class="td-next"></td>').text(data.email).addClass('tdEmail');
+    //     var column6 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
+    //     row.append(column2);
+    //     row.append(column3);
+    //     row.append(column4);
+    //     row.append(column5);
+    //     row.append(column6);
+    // }
+    // else if($("#account").hasClass("active") === true) {
+    //     var column2 = $('<td class="td-next"></td>').text(data.login).addClass('tdLogin');
+    //     var column3 = $('<td class="td-next"></td>').text(data.password).addClass('tdPassword');
+    //     var column4 = $('<td class="td-next"></td>').text(data.currency).addClass('tdCurrency');
+    //     var column5 = $('<td class="td-next" id ="'+data.clientId+'" ></td>').text(data.clientFIO).addClass('tdClient');
+    //     row.append(column2);
+    //     row.append(column3);
+    //     row.append(column4);
+    //     row.append(column5);
+    // }
+    // $("#result_tbody_id").append(row);
+    // addListeners(data);
+
+    // var checkbox = "<input type=\"checkbox\" autocomplete=\"off\">";
+    // {"defaultContent" : checkbox, "sTitle": headCheckbox },
+    // { "sTitle": "ID", "mData": "id"},
+    // { "sTitle": "Банк", "mData": "name" }
+    var table = $('#result_table_id').DataTable();
+    table.row.add( {
+        "id":     data.id,
+        "name":   data.name,
+    } ).draw();
     console.log("Save");
 }
 //-----------------------------------------------//
@@ -205,33 +216,20 @@ $( document ).ready(function(){
 });
 
 function addHeadAndBody() {
-    $("#result_table_id tbody").remove();
-    $("#result_table_id thead").remove();
-
-    var head = "<thead><tr></tr></thead>";
-    var body = "<tbody id = \"result_tbody_id\" class = \"result_tbody\"></tbody>";
-    var column = "";
-
-    $("#result_table_id").append(head+body);
-
     $('#customCheck').on('click',function () {
-
-        //console.log("Выбрали все!");
         var allIdToDelete = $('#result_table_id tbody tr td div input');
+        var allTR = $('#result_table_id tbody tr');
+        var allcheckbox = $(".custom-control-input");
 
-        if($('#customCheck').prop("checked") == false){
-            $('#result_table_id tbody tr').removeClass("selectedToDelete");
-            $('#result_table_id tbody tr').removeClass("selectedToEdit");
-            $.each(allIdToDelete, function( key, value){
-                $('#'+value.id).prop("checked",false);
-            });
+        if($('#customCheck').prop("checked") === false){
+            allTR.removeClass("selectedToDelete");
+            allTR.removeClass("selectedToEdit");
+            allcheckbox.prop("checked",false);
         }
         else {
-            $('#result_table_id tbody tr').addClass("selectedToDelete");
-            $('#result_table_id tbody tr').addClass("selectedToEdit");
-            $.each(allIdToDelete, function( key, value){
-                $('#'+value.id).prop("checked",true);
-            });
+            allTR.addClass("selectedToDelete");
+            allTR.addClass("selectedToEdit");
+            allcheckbox.prop("checked",true);
         }
         if (($('.selectedToEdit').length) > 1 || ($('.selectedToEdit').length) == 0){
             $('.buttonEdit').prop('disabled', true);
@@ -246,39 +244,11 @@ function addHeadAndBody() {
             $('.buttonDelete').prop('disabled', false);
         }
     });
-
-    if($("#bank").hasClass("active") === true) {
-        column = "<th class=\"td-next\">ID</th>";
-        column += "<th class=\"td-next\">Name</th>";
-    }
-    else if($("#worker").hasClass("active") === true) {
-        column = "<td class=\"td-next\">ID</td>";
-        column += "<td class=\"td-next\">ФИО</td>";
-        column += "<td class=\"td-next\">Должность</td>";
-        column += "<td class=\"td-next\">Телефон</td>";
-        column += "<td class=\"td-next\">Банк</td>";
-    }
-    else if($("#client").hasClass("active") === true) {
-        column = "<td class=\"td-next\">ID</td>";
-        column += "<td class=\"td-next\">ФИО</td>";
-        column += "<td class=\"td-next\">Телефон</td>";
-        column += "<td class=\"td-next\">Адрес</td>";
-        column += "<td class=\"td-next\">Email</td>";
-        column += "<td class=\"td-next\">Банк</td>";
-    }
-    else if($("#account").hasClass("active") === true) {
-        column = "<td class=\"td-next\">ID</td>";
-        column += "<td class=\"td-next\">Логин</td>";
-        column += "<td class=\"td-next\">Пароль</td>";
-        column += "<td class=\"td-next\">Кол-во денежных средств</td>";
-        column += "<td class=\"td-next\">Клиент</td>";
-    }
-    $("#result_table_id thead tr").append(column)
 }
 
 function successLoad(data) {
     initTable("result_table_id",data,data);
-    // addHeadAndBody();
+    addHeadAndBody();
     // $.each( data, function( key, value ) {
     //     var row = $('<tr id = tr'+value.id+'></tr>');
     //     var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
@@ -498,7 +468,7 @@ function addListeners(data){
             $('#tr'+data.id+'').removeClass('selectedToEdit');
         }
         else {
-            $('#tr' + data.id + '').addClass('selectedToDelete');
+            $('#tr'+data.id+'').addClass('selectedToDelete');
             $('#tr'+data.id+'').addClass('selectedToEdit');
         }
         if (($('.selectedToEdit').length) > 1 || ($('.selectedToEdit').length) == 0){
@@ -545,11 +515,6 @@ $('.buttonEdit').on('click',function () {
     $('.buttonEdit').addClass("active");
     addContent();
 });
-
-// $(document).ready(function() {
-// 	$("#phone").mask("+375-99-999-99-99");
-// });
-
 //-----------------------------------------------//
 
 //----------------Модальное окно-----------------//
@@ -579,10 +544,7 @@ function addContent() {
             doEdit();
         } else if($('.buttonAdd').hasClass("active") === true) {
             doAdd();
-        } else if($('.buttonSearch').hasClass("active") === true) {
-            doSearch();
         }
-
     });
     var input = "";
     var nameModal = "";
@@ -734,13 +696,14 @@ function closeModel() {
 }
 
 function initTable(tableId,data,cols){
-    var checkbox ="<div class=\"custom-control custom-checkbox\">\n" +
+    var headCheckbox ="<div class=\"custom-control custom-checkbox\">\n" +
         "<input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
         "<label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
         "</div>\n";
+    var checkbox = "<input type=\"checkbox\" autocomplete=\"off\">";
     var table = $('#'+tableId).DataTable({
         "columnDefs": [
-            { "width": "5%", margin : "1% 1% 1% 1%",orderable: false,  "className": "text-center", "targets": 0}
+            { "width": "5%",orderable: false,  "className": "text-center", "targets": 0}
         ],
         select: {
             style:    'os',
@@ -749,8 +712,7 @@ function initTable(tableId,data,cols){
         data : data,
         rowId: "id",
         aoColumns: [
-            //{"defaultContent" : '<input type="checkbox" autocomplete="off">', "sTitle": '<input type="checkbox" autocomplete="off">'},
-            {"defaultContent" : checkbox, "sTitle": checkbox},
+            {"defaultContent" : checkbox, "sTitle": headCheckbox },
             { "sTitle": "ID", "mData": "id"},
             { "sTitle": "Банк", "mData": "name" }
         ]

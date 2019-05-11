@@ -13,20 +13,26 @@
     font-weight: bold;
     color: #ffffff;
    }
-   TBODY {
-    background: #ffffff; /* Цвет фона ячейки */
-    /*text-align: center; !* Выравнивание по левому краю *!*/
-   }
-    tbody tr:hover {
-        background: #848d95; /* Цвет фона при наведении */
-        color: #fff; /* Цвет текста при наведении */
-    }
+   /*TBODY {*/
+   /* background: #ffffff; !* Цвет фона ячейки *!*/
+   /* !*text-align: center; !* Выравнивание по левому краю *!*!*/
+   /*}*/
+   /* tbody tr:hover {*/
+   /*     !*background: #848d95; !* Цвет фона при наведении *!*!*/
+   /*     background-color: #4CAF50;*/
+   /*     color: #4CAF50; !* Цвет текста при наведении *!*/
+   /* }*/
    TH, TD {
     'border: 1px solid black; /* Параметры рамки */
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     padding: 12px; /* Поля вокруг текста */
    }
+
+table.dataTable tbody tr:hover {
+    background-color: #848d95;
+    color: white;
+}
 
 .dataTables_wrapper {
     margin-top: 10px;
@@ -126,9 +132,8 @@
     background-color: #4CAF50;
     color: white;
 }
-
-.selectedToDelete{
-    background: #848d95; /* Цвет фона при наведении */
+table.dataTable tbody tr.selectedToDelete {
+    background-color: #848d95; /* Цвет фона при наведении */
     color: #fff; /* Цвет текста при наведении */
 }
 

@@ -49,7 +49,4 @@
 <%--</script>--%>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>
-<%--<script>$(document).ready( function () {--%>
-<%--    $('#result_table_id').DataTable();--%>
-<%--} );</script>--%>
 </html>
