@@ -34,7 +34,7 @@
 	</div>
  	<div id="content">
  		<table id = "result_table_id" class = "result_table">
-			<tbody></tbody>
+<%--			<tbody></tbody>--%>
  		</table>
  	</div>
 	<!-- Модальное окно -->

@@ -74,63 +74,42 @@ function doAdd() {
 }
 
 function successAdd(data){
-    // var row = $('<tr id = tr'+data.id+'></tr>');
-    // var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
-    //     '  <input type="checkbox" class="custom-control-input" id="customCheck'+data.id+'"/>\n' +
-    //     '  <label class="custom-control-label" for="customCheck'+data.id+'"></label>\n' +
-    //     '</div></td>');
-    // var column1 = $('<td class="td-next"></td>').text(data.id).addClass('tdId');
-    // row.append(column0);
-    // row.append(column1);
-    // if($("#bank").hasClass("active") === true) {
-    //     var column2 = $('<td class="td-next"></td>').text(data.name).addClass('tdName');
-    //     row.append(column2);
-    // }
-    // else if($("#worker").hasClass("active") === true) {
-    //     var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
-    //     var column3 = $('<td class="td-next" id ="'+data.positionObjName+'"></td>').text(data.position).addClass('tdPosition');
-    //     var column4 = $('<td class="td-next"></td>').text(data.phone).addClass('tdPhone');
-    //     var column5 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
-    //     row.append(column2);
-    //     row.append(column3);
-    //     row.append(column4);
-    //     row.append(column5);
-    // }
-    // else if($("#client").hasClass("active") === true) {
-    //     //console.log(data);
-    //     var column2 = $('<td class="td-next"></td>').text(data.fio).addClass('tdFio');
-    //     var column3 = $('<td class="td-next"></td>').text(data.phoneNumber).addClass('tdPhoneNumber');
-    //     var column4 = $('<td class="td-next"></td>').text(data.address).addClass('tdAddress');
-    //     var column5 = $('<td class="td-next"></td>').text(data.email).addClass('tdEmail');
-    //     var column6 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
-    //     row.append(column2);
-    //     row.append(column3);
-    //     row.append(column4);
-    //     row.append(column5);
-    //     row.append(column6);
-    // }
-    // else if($("#account").hasClass("active") === true) {
-    //     var column2 = $('<td class="td-next"></td>').text(data.login).addClass('tdLogin');
-    //     var column3 = $('<td class="td-next"></td>').text(data.password).addClass('tdPassword');
-    //     var column4 = $('<td class="td-next"></td>').text(data.currency).addClass('tdCurrency');
-    //     var column5 = $('<td class="td-next" id ="'+data.clientId+'" ></td>').text(data.clientFIO).addClass('tdClient');
-    //     row.append(column2);
-    //     row.append(column3);
-    //     row.append(column4);
-    //     row.append(column5);
-    // }
-    // $("#result_tbody_id").append(row);
-    // addListeners(data);
-
-    // var checkbox = "<input type=\"checkbox\" autocomplete=\"off\">";
-    // {"defaultContent" : checkbox, "sTitle": headCheckbox },
-    // { "sTitle": "ID", "mData": "id"},
-    // { "sTitle": "Банк", "mData": "name" }
     var table = $('#result_table_id').DataTable();
-    table.row.add( {
-        "id":     data.id,
-        "name":   data.name,
-    } ).draw();
+    if($("#bank").hasClass("active") === true) {
+        table.row.add({
+            "id": data.id,
+            "name": data.name
+        }).draw();
+    }else if($("#worker").hasClass("active") === true) {
+        // var column3 = $('<td class="td-next" id ="'+data.positionObjName+'"></td>').text(data.position).addClass('tdPosition');
+        // var column5 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
+        table.row.add({
+            "id": data.id,
+            "fio": data.fio,
+            "position": data.position,
+            "phone": data.phone,
+            "bankName": data.bankName
+        }).draw();
+    }else if($("#client").hasClass("active") === true) {
+        //var column6 = $('<td class="td-next" id ="'+data.bankId+'" ></td>').text(data.bankName).addClass('tdBank');
+        table.row.add({
+            "id": data.id,
+            "phoneNumber": data.phoneNumber,
+            "address": data.address,
+            "email": data.email,
+            "bankName": data.bankName
+        }).draw();
+    }else if($("#account").hasClass("active") === true) {
+        //var column5 = $('<td class="td-next" id ="'+data.clientId+'" ></td>').text(data.clientFIO).addClass('tdClient');
+        table.row.add({
+            "id": data.id,
+            "login": data.login,
+            "password": data.password,
+            "currency": data.currency,
+            "clientFIO": data.clientFIO
+        }).draw();
+    }
+    //addListeners(data);
     console.log("Save");
 }
 //-----------------------------------------------//
@@ -245,6 +224,104 @@ function addHeadAndBody() {
         }
     });
 }
+
+function initTable(tableId,data,cols){
+    var headCheckbox ="<div class=\"custom-control custom-checkbox\">\n" +
+        "<input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
+        "<label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
+        "</div>\n";
+    var checkbox = "<input type=\"checkbox\" autocomplete=\"off\">";
+    var table = "";
+
+     if($('#' + tableId).hasClass("dataTable")){
+         $('#content').empty();
+         $('#content').append("<table id = \"result_table_id\" class = \"result_table\"></table>")
+     }
+    if($("#bank").hasClass("active") === true) {
+        table = $('#' + tableId).DataTable({
+            "columnDefs": [
+                {"width": "5%", orderable: false, "className": "text-center", "targets": 0}
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            data: data,
+            rowId: "id",
+            aoColumns: [
+                {"defaultContent": checkbox, "sTitle": headCheckbox},
+                {"sTitle": "ID", "mData": "id"},
+                {"sTitle": "Банк", "mData": "name"}
+            ]
+        });
+    }else if($("#worker").hasClass("active") === true) {
+        table = $('#' + tableId).DataTable({
+            "columnDefs": [
+                {"width": "5%", orderable: false, "className": "text-center", "targets": 0}
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            data: data,
+            rowId: "id",
+            aoColumns: [
+                {"defaultContent": checkbox, "sTitle": headCheckbox},
+                {"sTitle": "ID", "mData": "id"},
+                {"sTitle": "ФИО", "mData": "fio"},
+                {"sTitle": "Должность", "mData": "position"},
+                {"sTitle": "Телефон", "mData": "phone"},
+                {"sTitle": "Банк", "mData": "bankName"}
+            ]
+        });
+    }else if($("#client").hasClass("active") === true) {
+        table = $('#' + tableId).DataTable({
+            "columnDefs": [
+                {"width": "5%", orderable: false, "className": "text-center", "targets": 0}
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            data: data,
+            rowId: "id",
+            aoColumns: [
+                {"defaultContent": checkbox, "sTitle": headCheckbox},
+                {"sTitle": "ID", "mData": "id"},
+                {"sTitle": "Телефон", "mData": "phoneNumber"},
+                {"sTitle": "Адрес", "mData": "address"},
+                {"sTitle": "Email", "mData": "email"},
+                {"sTitle": "Банк", "mData": "bankName"}
+            ]
+        });
+    }else if($("#account").hasClass("active") === true) {
+        table = $('#' + tableId).DataTable({
+            "columnDefs": [
+                {"width": "5%", orderable: false, "className": "text-center", "targets": 0}
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            data: data,
+            rowId: "id",
+            aoColumns: [
+                {"defaultContent": checkbox, "sTitle": headCheckbox},
+                {"sTitle": "ID", "mData": "id"},
+                {"sTitle": "Логин", "mData": "login"},
+                {"sTitle": "Пароль", "mData": "password"},
+                {"sTitle": "Денежные средства", "mData": "currency"},
+                {"sTitle": "Клиент", "mData": "clientFIO"}
+            ]
+        });
+    }
+
+    // $('#'+tableId+' tbody').on( 'click', 'tr', function () {
+    //     $(this).toggleClass('selected');
+    // });
+    return table;
+}
+
 
 function successLoad(data) {
     initTable("result_table_id",data,data);
@@ -693,36 +770,6 @@ function closeModel() {
     $('.buttonEdit').removeClass("active");
     $('.buttonAdd').removeClass("active");
     console.log("Close Modal");
-}
-
-function initTable(tableId,data,cols){
-    var headCheckbox ="<div class=\"custom-control custom-checkbox\">\n" +
-        "<input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck\">\n" +
-        "<label class=\"custom-control-label\" for=\"customCheck\"></label>\n" +
-        "</div>\n";
-    var checkbox = "<input type=\"checkbox\" autocomplete=\"off\">";
-    var table = $('#'+tableId).DataTable({
-        "columnDefs": [
-            { "width": "5%",orderable: false,  "className": "text-center", "targets": 0}
-        ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        data : data,
-        rowId: "id",
-        aoColumns: [
-            {"defaultContent" : checkbox, "sTitle": headCheckbox },
-            { "sTitle": "ID", "mData": "id"},
-            { "sTitle": "Банк", "mData": "name" }
-        ]
-    });
-
-    // $('#'+tableId+' tbody').on( 'click', 'tr', function () {
-    //     $(this).toggleClass('selected');
-    // });
-
-    return table;
 }
 
 //-----------------------------------------------//
