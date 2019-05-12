@@ -13,6 +13,6 @@ public interface BankService {
     Bank editBank(Bank bank);
     List<Bank> getAll();
     Bank getBank(Long id);
-    void deleteSelected(List<Bank> listBank);
+    void deleteSelected(List<Long> list);
     List<Bank> searchBank(String name);
 }

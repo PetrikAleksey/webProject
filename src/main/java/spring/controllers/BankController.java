@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import spring.DAO.Service.BankService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,10 +39,14 @@ public class BankController {
 
 	@RequestMapping(value="/deleteBankAll", method=RequestMethod.POST,produces = {"application/json; charset=utf-8;"})//,consumes = MediaType.APPLICATION_JSON_VALUE)//produces = {"application/json; charset=utf-8;"})
 	@ResponseBody
-	public String deleteBankAll(@RequestBody List<Bank> listBank) {
-		//listBank.forEach(System.out::println);
-		bankService.deleteSelected(listBank);
-		return new Gson().toJson(listBank);
+	public String deleteBankAll(@RequestBody List<String> list) {
+		List<Long> longList = new ArrayList<>();
+		for(String s : list) longList.add(Long.valueOf(s));
+		longList.forEach(System.out::println);
+		System.out.println("123");
+		bankService.deleteSelected(longList);
+		System.out.println("124");
+		return new Gson().toJson(longList);
 	}
 
 	@RequestMapping(value="/loadBank", method=RequestMethod.GET, produces = {"application/json; charset=utf-8;"})

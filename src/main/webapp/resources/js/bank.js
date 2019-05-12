@@ -120,10 +120,11 @@ function doAllSelectedDelete() {
 
     if($("#bank").hasClass("active") === true) {
         for (i = 0; i < allToDelete.length; i++) {
-            var bank = {};
-            bank.id = $(allToDelete[i], this).children().eq(1).text();
-            bank.name = $(allToDelete[i], this).children().eq(2).text();
-            mass.push(bank);
+            // var bank = {};
+            // bank.id = $(allToDelete[i], this).children().eq(1).text();
+            // bank.name = $(allToDelete[i], this).children().eq(2).text();
+            var id = $(allToDelete[i], this).children().eq(1).text();
+            mass.push(id);
         }
         sendAjax('deleteBankAll', 'POST', JSON.stringify(mass), successDelete);
     }
@@ -193,7 +194,7 @@ $( document ).ready(function(){
     }
 });
 
-function addHeadAndBody() {
+function addHeadListeners() {
     $('#customCheck').on('click',function () {
         //var allIdToDelete = $('#result_table_id tbody tr td div input');
         var allTR = $('#result_table_id tbody tr');
@@ -323,57 +324,8 @@ function initTable(tableId,data,cols){
 
 function successLoad(data) {
     initTable("result_table_id",data,data);
-    addHeadAndBody();
-    addListeners();
-    // $.each( data, function( key, value ) {
-    //     var row = $('<tr id = tr'+value.id+'></tr>');
-    //     var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
-    //         '  <input type="checkbox" class="custom-control-input" id="customCheck'+value.id+'"/>\n' +
-    //         '  <label class="custom-control-label" for="customCheck'+value.id+'"></label>\n' +
-    //         '</div></td>');
-    //     var column1 = $('<td class="td-next"></td>').text(value.id).addClass('tdId');
-    //     //row.append(column0);
-    //     row.append(column1);
-    //     if($("#bank").hasClass("active") === true) {
-    //         var column2 = $('<td class="td-next"></td>').text(value.name).addClass('tdName');
-    //         row.append(column2);
-    //     }
-    //     else if($("#worker").hasClass("active") === true) {
-    //         var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
-    //         var column3 = $('<td class="td-next" id="'+value.positionObjName+'"></td>').text(value.position).addClass('tdPosition');
-    //         var column4 = $('<td class="td-next"></td>').text(value.phone).addClass('tdPhone');
-    //         var column5 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
-    //         row.append(column2);
-    //         row.append(column3);
-    //         row.append(column4);
-    //         row.append(column5);
-    //     }
-    //     else if($("#client").hasClass("active") === true) {
-    //         var column2 = $('<td class="td-next"></td>').text(value.fio).addClass('tdFio');
-    //         var column3 = $('<td class="td-next"></td>').text(value.phoneNumber).addClass('tdPhoneNumber');
-    //         var column4 = $('<td class="td-next"></td>').text(value.address).addClass('tdAddress');
-    //         var column5 = $('<td class="td-next"></td>').text(value.email).addClass('tdEmail');
-    //         var column6 = $('<td class="td-next" id="'+value.bankId+'"></td>').text(value.bankName).addClass('tdBank');
-    //         row.append(column2);
-    //         row.append(column3);
-    //         row.append(column4);
-    //         row.append(column5);
-    //         row.append(column6);
-    //     }
-    //     else if($("#account").hasClass("active") === true) {
-    //         var column2 = $('<td class="td-next"></td>').text(value.login).addClass('tdLogin');
-    //         var column3 = $('<td class="td-next"></td>').text(value.password).addClass('tdPassword');
-    //         var column4 = $('<td class="td-next"></td>').text(value.currency).addClass('tdCurrency');
-    //         var column5 = $('<td class="td-next" id="'+value.clientId+'"></td>').text(value.clientFIO).addClass('tdClient');
-    //         row.append(column2);
-    //         row.append(column3);
-    //         row.append(column4);
-    //         row.append(column5);
-    //     }
-    //     $("#result_tbody_id").append(row);
-    //     addListeners(value);
-    // });
-    // console.log("Load");
+    addHeadListeners();
+    addBodyListeners();
 }
 //-----------------------------------------------//
 
@@ -548,11 +500,10 @@ function successlistClient(data) {
 }
 //-----------------------------------------------//
 //--------------------Листнеры-------------------//
-function addListeners(){
+function addBodyListeners(){
     $('#result_table_id tbody').on('click','tr',function () {
         var checkbox =  $(this).children().children().prop("checked");
         console.log(checkbox);
-        //if(checkbox.prop("checked") === false){
         if(checkbox === false){
             $(this).children().children().prop('checked', false);
             $(this).removeClass('selectedToDelete');
@@ -577,34 +528,6 @@ function addListeners(){
         }
     });
 }
-
-// function addListeners(data){
-//     var idTR = "#tr"+data.id;
-//     //$('#result_table_id tbody '+idTR+' td input');
-//     $('#customCheck'+data.id+'').on('click',function () {
-//     //$('#result_table_id tbody '+idTR+' td input').on('click',function () {
-//         if($('#customCheck'+data.id+'').prop("checked") === false){
-//             $(idTR).removeClass('selectedToDelete');
-//             $(idTR).removeClass('selectedToEdit');
-//         }
-//         else {
-//             $(idTR).addClass('selectedToDelete');
-//             $(idTR).addClass('selectedToEdit');
-//         }
-//         if (($('.selectedToEdit').length) > 1 || ($('.selectedToEdit').length) == 0){
-//             $('.buttonEdit').prop('disabled', true);
-//         }
-//         else {
-//             $('.buttonEdit').prop('disabled', false);
-//         }
-//         if (($('.selectedToDelete').length) == 0 ){
-//             $('.buttonDelete').prop('disabled', true);
-//         }
-//         else {
-//             $('.buttonDelete').prop('disabled', false);
-//         }
-//     });
-// }
 $('#bank').on('click',function () {
     $('.vertical-menu a').removeClass("active");
     $('#bank').addClass("active");

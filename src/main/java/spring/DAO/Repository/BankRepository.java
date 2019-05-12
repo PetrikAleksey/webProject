@@ -20,4 +20,9 @@ public interface BankRepository extends JpaRepository<Bank, Long> {
     @Query("select b from Bank b where b.name like %:name%")
     List<Bank> findAllByNameLike(@Param("name") String name);
 
+//    @Query("DELETE FROM Bank b WHERE b.id in :list")
+//    void deleteByIdBank(@Param("list") List<Long> list);
+    @Query("delete from Bank b where b.id in (:list)")
+    void deleteAbc(@Param("list") List<Long> list);
+
 }
