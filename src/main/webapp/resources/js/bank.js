@@ -47,7 +47,7 @@ function doAdd() {
         var objBank = {};
         objBank.id = idBank;
         objBank.name = nameBank;
-        var objClient = {}
+        var objClient = {};
         objClient.fio = fio;
         objClient.phoneNumber = phoneNumber;
         objClient.address = address;
@@ -113,7 +113,6 @@ function successAdd(data){
     console.log("Save");
 }
 //-----------------------------------------------//
-
 //--------------------Удалить--------------------//
 function doAllSelectedDelete() {
     var mass = []
@@ -179,9 +178,9 @@ function doAllSelectedDelete() {
 }
 
 function successDelete(data) {
-    $.each(data, function (key, value) {
-        $("#tr" + String(value.id)).remove();
-    });
+    var table = $('#result_table_id').DataTable();
+    var rows = table.rows( '.selectedToDelete' );
+    rows.remove().draw();
     console.log("Delete");
 }
 //-----------------------------------------------//
@@ -196,9 +195,9 @@ $( document ).ready(function(){
 
 function addHeadAndBody() {
     $('#customCheck').on('click',function () {
-        var allIdToDelete = $('#result_table_id tbody tr td div input');
+        //var allIdToDelete = $('#result_table_id tbody tr td div input');
         var allTR = $('#result_table_id tbody tr');
-        var allcheckbox = $(".custom-control-input");
+        var allcheckbox = $('#result_table_id tbody tr td input');
 
         if($('#customCheck').prop("checked") === false){
             allTR.removeClass("selectedToDelete");
@@ -315,7 +314,6 @@ function initTable(tableId,data,cols){
             ]
         });
     }
-
     // $('#'+tableId+' tbody').on( 'click', 'tr', function () {
     //     $(this).toggleClass('selected');
     // });
@@ -326,6 +324,7 @@ function initTable(tableId,data,cols){
 function successLoad(data) {
     initTable("result_table_id",data,data);
     addHeadAndBody();
+    addListeners();
     // $.each( data, function( key, value ) {
     //     var row = $('<tr id = tr'+value.id+'></tr>');
     //     var column0  = $('<td class="td-first"><div class="custom-control custom-checkbox">\n' +
@@ -449,9 +448,21 @@ function doEdit() {
 }
 
 function successEdit(data) {
-    var row =  $('#tr'+data.id+'');
+
+    var table = $('#result_table_id').DataTable();
+    var rows = table.row( '.selectedToEdit' );
+    var row = $('#result_table_id tbody').children('.selectedToEdit')
+
+    console.log(row);
+
+    //var row =  $('#tr'+data.id+'');
+    //var table = $('#result_table_id').DataTable();
     if($("#bank").hasClass("active") === true) {
-        row.children().eq(2).text(data.name);
+        // row.children().eq(2).text(data.name);
+        // row.data({
+        //         //     "name": data.name
+        //         // }).draw();
+         rows.data(data).draw();
     }
     else if($("#worker").hasClass("active") === true) {
         row.children().eq(2).text(data.fio);
@@ -478,11 +489,10 @@ function successEdit(data) {
     }
     row.removeClass('selectedToDelete');
     row.removeClass('selectedToEdit');
-    $('#customCheck'+data.id+'').prop("checked",false);
+    //$('#customCheck'+data.id+'').prop("checked",false);
     console.log("Edit");
 }
 //-----------------------------------------------//
-
 //--------------------Списки---------------------//
 function successlistPosition(data) {
     var option = "";
@@ -538,15 +548,20 @@ function successlistClient(data) {
 }
 //-----------------------------------------------//
 //--------------------Листнеры-------------------//
-function addListeners(data){
-    $('#customCheck'+data.id+'').on('click',function () {
-        if($('#customCheck'+data.id+'').prop("checked") === false){
-            $('#tr'+data.id+'').removeClass('selectedToDelete');
-            $('#tr'+data.id+'').removeClass('selectedToEdit');
+function addListeners(){
+    $('#result_table_id tbody').on('click','tr',function () {
+        var checkbox =  $(this).children().children().prop("checked");
+        console.log(checkbox);
+        //if(checkbox.prop("checked") === false){
+        if(checkbox === false){
+            $(this).children().children().prop('checked', false);
+            $(this).removeClass('selectedToDelete');
+            $(this).removeClass('selectedToEdit');
         }
         else {
-            $('#tr'+data.id+'').addClass('selectedToDelete');
-            $('#tr'+data.id+'').addClass('selectedToEdit');
+            $(this).children().children().prop('checked', true);
+            $(this).addClass('selectedToDelete');
+            $(this).addClass('selectedToEdit');
         }
         if (($('.selectedToEdit').length) > 1 || ($('.selectedToEdit').length) == 0){
             $('.buttonEdit').prop('disabled', true);
@@ -562,6 +577,34 @@ function addListeners(data){
         }
     });
 }
+
+// function addListeners(data){
+//     var idTR = "#tr"+data.id;
+//     //$('#result_table_id tbody '+idTR+' td input');
+//     $('#customCheck'+data.id+'').on('click',function () {
+//     //$('#result_table_id tbody '+idTR+' td input').on('click',function () {
+//         if($('#customCheck'+data.id+'').prop("checked") === false){
+//             $(idTR).removeClass('selectedToDelete');
+//             $(idTR).removeClass('selectedToEdit');
+//         }
+//         else {
+//             $(idTR).addClass('selectedToDelete');
+//             $(idTR).addClass('selectedToEdit');
+//         }
+//         if (($('.selectedToEdit').length) > 1 || ($('.selectedToEdit').length) == 0){
+//             $('.buttonEdit').prop('disabled', true);
+//         }
+//         else {
+//             $('.buttonEdit').prop('disabled', false);
+//         }
+//         if (($('.selectedToDelete').length) == 0 ){
+//             $('.buttonDelete').prop('disabled', true);
+//         }
+//         else {
+//             $('.buttonDelete').prop('disabled', false);
+//         }
+//     });
+// }
 $('#bank').on('click',function () {
     $('.vertical-menu a').removeClass("active");
     $('#bank').addClass("active");
@@ -771,5 +814,4 @@ function closeModel() {
     $('.buttonAdd').removeClass("active");
     console.log("Close Modal");
 }
-
 //-----------------------------------------------//
