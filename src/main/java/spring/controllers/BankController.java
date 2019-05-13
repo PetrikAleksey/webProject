@@ -59,6 +59,13 @@ public class BankController {
 	 public String bank(Locale locale, Model model) {
 	  return "bank";
 	 }
+
+	@RequestMapping(value = "/bankModalAdd", method = RequestMethod.GET)
+	public String bankModalAdd(Locale locale, Model model) {
+	    System.out.println("Done");
+
+	    return "bankModalAdd";
+	}
 	
 }
 

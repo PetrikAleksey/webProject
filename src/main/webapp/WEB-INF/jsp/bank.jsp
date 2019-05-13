@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<jsp:include page="headConfig.jsp" />
+<jsp:include page="headConfig.jsp"/>
 <title>CRUD Bank</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link type="text/css" href="<c:url value='/resources/css/style.css' />" rel="stylesheet" />

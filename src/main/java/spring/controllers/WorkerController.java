@@ -19,11 +19,6 @@ public class WorkerController {
     @Autowired
     public WorkerService workerService;
 
-    @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public String worker(Locale locale, Model model) {
-        return "worker";
-    }
-
     @RequestMapping(value="/listPosition", method=RequestMethod.GET, produces = {"application/json; charset=utf-8;"})
     @ResponseBody
     public String loadPosition() {

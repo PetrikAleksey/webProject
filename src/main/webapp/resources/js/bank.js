@@ -128,6 +128,7 @@ function successAdd(data){
 function doAllSelectedDelete() {
     var mass = []
     var allToDelete = $('.selectedToDelete');
+
     for (i = 0; i < allToDelete.length; i++) {
         var id = $(allToDelete[i], this).children().eq(1).text();
         mass.push(id);
@@ -372,42 +373,42 @@ function successEdit(data) {
 
     var table = $('#result_table_id').DataTable();
     var rows = table.row( '.selectedToEdit' );
-    var row = $('#result_table_id tbody').children('.selectedToEdit')
+    //var row = $('#result_table_id tbody').children('.selectedToEdit')
 
-    console.log(row);
+    rows.data(data).draw();
 
     //var row =  $('#tr'+data.id+'');
     //var table = $('#result_table_id').DataTable();
-    if($("#bank").hasClass("active") === true) {
-        // row.children().eq(2).text(data.name);
-        // row.data({
-        //         //     "name": data.name
-        //         // }).draw();
-         rows.data(data).draw();
-    }
-    else if($("#worker").hasClass("active") === true) {
-        row.children().eq(2).text(data.fio);
-        row.children().eq(3).text(data.position);
-        row.children().eq(3).attr("id",data.positionObjName);
-        row.children().eq(4).text(data.phone);
-        row.children().eq(5).attr("id",data.bankId)
-        row.children().eq(5).text(data.bankName);
-    }
-    else if($("#client").hasClass("active") === true) {
-        row.children().eq(2).text(data.fio);
-        row.children().eq(3).text(data.phoneNumber);
-        row.children().eq(4).text(data.address);
-        row.children().eq(5).text(data.email);
-        row.children().eq(6).attr("id",data.bankId)
-        row.children().eq(6).text(data.bankName);
-    }
-    else if($("#account").hasClass("active") === true) {
-        row.children().eq(2).text(data.login);
-        row.children().eq(3).text(data.password);
-        row.children().eq(4).text(data.currency);
-        row.children().eq(5).attr("id",data.clientId)
-        row.children().eq(5).text(data.clientFIO);
-    }
+    // if($("#bank").hasClass("active") === true) {
+    //     // row.children().eq(2).text(data.name);
+    //     // row.data({
+    //     //         //     "name": data.name
+    //     //         // }).draw();
+    //      rows.data(data).draw();
+    // }
+    // else if($("#worker").hasClass("active") === true) {
+    //     row.children().eq(2).text(data.fio);
+    //     row.children().eq(3).text(data.position);
+    //     row.children().eq(3).attr("id",data.positionObjName);
+    //     row.children().eq(4).text(data.phone);
+    //     row.children().eq(5).attr("id",data.bankId)
+    //     row.children().eq(5).text(data.bankName);
+    // }
+    // else if($("#client").hasClass("active") === true) {
+    //     row.children().eq(2).text(data.fio);
+    //     row.children().eq(3).text(data.phoneNumber);
+    //     row.children().eq(4).text(data.address);
+    //     row.children().eq(5).text(data.email);
+    //     row.children().eq(6).attr("id",data.bankId)
+    //     row.children().eq(6).text(data.bankName);
+    // }
+    // else if($("#account").hasClass("active") === true) {
+    //     row.children().eq(2).text(data.login);
+    //     row.children().eq(3).text(data.password);
+    //     row.children().eq(4).text(data.currency);
+    //     row.children().eq(5).attr("id",data.clientId)
+    //     row.children().eq(5).text(data.clientFIO);
+    // }
     row.removeClass('selectedToDelete');
     row.removeClass('selectedToEdit');
     //$('#customCheck'+data.id+'').prop("checked",false);
@@ -415,43 +416,44 @@ function successEdit(data) {
 }
 //-----------------------------------------------//
 //--------------------Списки---------------------//
-function successlistPosition(data) {
-    var option = "";
-    if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
-        var tr = $('.selectedToEdit').children();
-        var positionId = $(tr, this).eq(3).attr("id");
-    }
-    $.each(data, function( key, value ) {
-        if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
-            option = "<option selected value="+key+">"+value+"</option>";
-        }else
-            option = "<option value="+key+">"+value+"</option>";
-        $('#select-position').append(option);
-    });
-}
-
-function successlistBank(data) {
-    var option = "";
-    //if ($('.buttonEdit').hasClass("active") === true && ($('#worker').hasClass("active") === true || $('#client').hasClass("active") === true)) {
-    if ($('.buttonEdit').hasClass("active") === true){
-        var tr = $('.selectedToEdit').children();
-        if($('#worker').hasClass("active") === true) {
-            var bankId = $(tr, this).eq(5).attr("id");
-            var bankName = $(tr, this).eq(5).text();
-        }
-        else if ($('#client').hasClass("active") === true){
-            var bankId = $(tr, this).eq(6).attr("id");
-            var bankName = $(tr, this).eq(6).text();
-        }
-    }
-    $.each(data, function( key, value ) {
-        if ($('.buttonEdit').hasClass("active") === true && (($('#worker').hasClass("active") === true) || ($('#client').hasClass("active") === true)) && value.id === bankId) {
-            option = "<option selected value=" + value.id + ">" + value.name + "</option>";
-        }else
-            option = "<option value="+value.id+">"+value.name+"</option>";
-        $('#select-bank').append(option);
-    });
-}
+// function successlistPosition(data) {
+//     var option = "";
+//     if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
+//         var tr = $('.selectedToEdit').children();
+//         var positionId = $(tr, this).eq(3).attr("id");
+//     }
+//     $.each(data, function( key, value ) {
+//         if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
+//             option = "<option selected value="+key+">"+value+"</option>";
+//         }else
+//             option = "<option value="+key+">"+value+"</option>";
+//         $('#select-position').append(option);
+//     });
+// }
+//
+// function successlistBank(data) {
+//     var option = "";
+//     var bankId = "";
+//     //var bankName = "";
+//     if ($('.buttonEdit').hasClass("active") === true){
+//         var tr = $('.selectedToEdit').children();
+//         if($('#worker').hasClass("active") === true) {
+//             bankId = $(tr, this).eq(5).attr("id");
+//             //bankName = $(tr, this).eq(5).text();
+//         }
+//         else if ($('#client').hasClass("active") === true){
+//             bankId = $(tr, this).eq(6).attr("id");
+//             //bankName = $(tr, this).eq(6).text();
+//         }
+//     }
+//     $.each(data, function( key, value ) {
+//         if ($('.buttonEdit').hasClass("active") === true && (($('#worker').hasClass("active") === true) || ($('#client').hasClass("active") === true)) && value.id === bankId) {
+//             option = "<option selected value=" + value.id + ">" + value.name + "</option>";
+//         }else
+//             option = "<option value="+value.id+">"+value.name+"</option>";
+//         $('#select-bank').append(option);
+//     });
+// }
 
 function successlistClient(data) {
     var option = "";
@@ -531,36 +533,36 @@ $('.buttonEdit').on('click',function () {
 
 //----------------Модальное окно-----------------//
 function addContent() {
-    var modelContent = "\t<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n" +
-        "\t\t<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
-        "\t\t\t<div class=\"modal-content\">\n" +
-        "\t\t\t\t<div class=\"modal-header\">\n" +
-        "\t\t\t\t\t<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>\n" +
-        "\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" onclick=closeModel()>\n" +
-        "\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\n" +
-        "\t\t\t\t\t</button>\n" +
-        "\t\t\t\t</div>\n" +
-        "\t\t\t\t<div class=\"modal-body\">\n" +
-        "\t\t\t\t</div>\n" +
-        "\t\t\t\t<div class=\"modal-footer\">\n" +
-        "\t\t\t\t\t<button type=\"button\" id=\"saveModified\" class=\"btn btn-success\" data-dismiss=\"modal\"></button>\n" +
-        "\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" onclick=closeModel()>Закрыть</button>\n" +
-        "\t\t\t\t</div>\n" +
-        "\t\t\t</div>\n" +
-        "\t\t</div>\n" +
-        "\t</div>"
-    $('.addContent').append(modelContent);
-
-    $('#saveModified').on('click',function () {
-        if ($('.buttonEdit').hasClass("active") === true){
-            doEdit();
-        } else if($('.buttonAdd').hasClass("active") === true) {
-            doAdd();
-        }
-    });
-    var input = "";
-    var nameModal = "";
-    var nameButton = "";
+    // var modelContent = "\t<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n" +
+    //     "\t\t<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
+    //     "\t\t\t<div class=\"modal-content\">\n" +
+    //     "\t\t\t\t<div class=\"modal-header\">\n" +
+    //     "\t\t\t\t\t<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>\n" +
+    //     "\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" onclick=closeModel()>\n" +
+    //     "\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\n" +
+    //     "\t\t\t\t\t</button>\n" +
+    //     "\t\t\t\t</div>\n" +
+    //     "\t\t\t\t<div class=\"modal-body\">\n" +
+    //     "\t\t\t\t</div>\n" +
+    //     "\t\t\t\t<div class=\"modal-footer\">\n" +
+    //     "\t\t\t\t\t<button type=\"button\" id=\"saveModified\" class=\"btn btn-success\" data-dismiss=\"modal\"></button>\n" +
+    //     "\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" onclick=closeModel()>Закрыть</button>\n" +
+    //     "\t\t\t\t</div>\n" +
+    //     "\t\t\t</div>\n" +
+    //     "\t\t</div>\n" +
+    //     "\t</div>"
+    // $('.addContent').append(modelContent);
+    //
+    // $('#saveModified').on('click',function () {
+    //     if ($('.buttonEdit').hasClass("active") === true){
+    //         doEdit();
+    //     } else if($('.buttonAdd').hasClass("active") === true) {
+    //         doAdd();
+    //     }
+    // });
+    // var input = "";
+    // var nameModal = "";
+    // var nameButton = "";
 
     if ($('.buttonEdit').hasClass("active") === true){
         console.log("Изменить");
@@ -634,20 +636,20 @@ function addContent() {
             sendAjax('loadClient', 'GET', "", successlistClient);
             input = "";
         }
-    } else if($('.buttonAdd').hasClass("active") === true || $('.buttonSearch').hasClass("active") === true) {
-        if($('.buttonAdd').hasClass("active") === true){
-            console.log("Добавить");
-            nameModal = "Добавление";
-            nameButton = "Добавить";
-        }else if ($('.buttonSearch').hasClass("active") === true){
-            console.log("Поиск");
-            nameModal = "Поиск";
-            nameButton = "Найти";
-        }
+    } else if($('.buttonAdd').hasClass("active") === true) {
+        // nameModal = "Добавление";
+        // nameButton = "Добавить";
+
         if($("#bank").hasClass("active") === true) {
+            console.log("Добавить банк");
             //var name = "";
-            input += "<label for=\"name_bank\">Название банка</label>" +
-                "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='' type=\"text\" maxlength=\"50\"/>";
+            // input += "<label for=\"name_bank\">Название банка</label>" +
+            //     "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='' type=\"text\" maxlength=\"50\"/>";
+            sendAjax('bankModalAdd', 'GET', "", function (data) {
+                console.log("Зашли");
+                var d = data;
+                $('.addContent').append(d);
+            });
         }
         else if($("#worker").hasClass("active") === true) {
             input += "<label for=\"fio\">ФИО</label>" +
@@ -693,9 +695,9 @@ function addContent() {
             input = "";
         }
     }
-    $('#exampleModalLabel').text(nameModal);
-    $('#saveModified').text(nameButton);
-    $('.modal-body').append(input);
+    // $('#exampleModalLabel').text(nameModal);
+    // $('#saveModified').text(nameButton);
+    // $('.modal-body').append(input);
 
     console.log("Load Modal");
 }
