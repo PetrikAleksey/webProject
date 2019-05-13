@@ -20,9 +20,15 @@ public interface BankRepository extends JpaRepository<Bank, Long> {
     @Query("select b from Bank b where b.name like %:name%")
     List<Bank> findAllByNameLike(@Param("name") String name);
 
-//    @Query("DELETE FROM Bank b WHERE b.id in :list")
-//    void deleteByIdBank(@Param("list") List<Long> list);
+    Bank getBankById(Long id);
+
+    //аннотация @Async указывает, что метод должен выполняться асинхронно.
+    //@Modifying говорит о том, что указанный метод должен быть интерпретирован как модифицирующий запрос
+    //@Transactional добавляет поддержку транзакций для указанного метода
+
+    @Transactional
+    @Modifying
     @Query("delete from Bank b where b.id in (:list)")
-    void deleteAbc(@Param("list") List<Long> list);
+    void deleteAllByid(@Param("list") List<Long> list);
 
 }

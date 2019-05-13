@@ -22,10 +22,10 @@ public class WorkerController {
     @RequestMapping(value="/listPosition", method=RequestMethod.GET, produces = {"application/json; charset=utf-8;"})
     @ResponseBody
     public String loadPosition() {
-        Map<String,String> mapPositions = new HashMap<String,String>();
+        Map<Integer,String> mapPositions = new HashMap<Integer,String>();
         Position[] positions = Position.values();
         for(int i = 0; i < positions.length;i++)
-            mapPositions.put(positions[i].name(),positions[i].toString());
+            mapPositions.put(positions[i].ordinal(),positions[i].toString());
         return new Gson().toJson(mapPositions);
     }
 

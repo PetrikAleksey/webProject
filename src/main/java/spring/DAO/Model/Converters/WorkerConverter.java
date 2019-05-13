@@ -12,7 +12,7 @@ public class WorkerConverter implements JsonSerializer<Worker>{//, JsonDeseriali
         object.addProperty("id", worker.getId().toString());
         object.addProperty("fio", worker.getFio());
         object.addProperty("position", worker.getPosition().toString());
-        object.addProperty("positionObjName", worker.getPosition().name());
+        object.addProperty("positionObjName", worker.getPosition().ordinal());
         object.addProperty("phone", worker.getPhone());
         object.addProperty("bankId", worker.getBank().getId());
         object.addProperty("bankName", worker.getBank().getName());
