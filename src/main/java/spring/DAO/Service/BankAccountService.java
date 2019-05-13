@@ -9,6 +9,6 @@ public interface BankAccountService {
     BankAccount addBankAccount(BankAccount bankAccount);
     BankAccount editBankAccount(BankAccount bankAccount);
     List<BankAccount> getAll();
-    void deleteSelected(List<BankAccount> listBankAccount);
+    void deleteSelected(List<Long> list);
 
 }

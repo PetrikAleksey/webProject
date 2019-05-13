@@ -14,6 +14,7 @@ import spring.DAO.Model.BankAccount;
 import spring.DAO.Model.Converters.BankAccountConverter;
 import spring.DAO.Service.BankAccountService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,10 +39,12 @@ public class BankAccountController {
 
     @RequestMapping(value="/deleteBankAccountAll", method=RequestMethod.POST,produces = {"application/json; charset=utf-8;"})//,consumes = MediaType.APPLICATION_JSON_VALUE)//produces = {"application/json; charset=utf-8;"})
     @ResponseBody
-    public String deleteBankAccountAll(@RequestBody List<BankAccount> listBankAccount) {
+    public void deleteBankAccountAll(@RequestBody List<String> list) {
+        List<Long> longList = new ArrayList<>();
+        for(String s : list) longList.add(Long.valueOf(s));
         //listBank.forEach(System.out::println);
-        bankAccountService.deleteSelected(listBankAccount);
-        return new Gson().toJson(listBankAccount);
+        bankAccountService.deleteSelected(longList);
+        //return new Gson().toJson(listBankAccount);
     }
 
     @RequestMapping(value="/editBankAccount", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})

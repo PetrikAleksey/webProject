@@ -36,7 +36,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public void deleteSelected(List<BankAccount> listBankAccount) {
-        bankAccountRepository.deleteAll(listBankAccount);
+    public void deleteSelected(List<Long> list) {
+        bankAccountRepository.deleteAllById(list);
     }
 }
