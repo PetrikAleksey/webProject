@@ -378,41 +378,8 @@ function successEdit(data) {
 
     rowEdit.data(data).draw();
 
-    //var row =  $('#tr'+data.id+'');
-    //var table = $('#result_table_id').DataTable();
-    // if($("#bank").hasClass("active") === true) {
-    //     // row.children().eq(2).text(data.name);
-    //     // row.data({
-    //     //         //     "name": data.name
-    //     //         // }).draw();
-    //      rows.data(data).draw();
-    // }
-    // else if($("#worker").hasClass("active") === true) {
-    //     row.children().eq(2).text(data.fio);
-    //     row.children().eq(3).text(data.position);
-    //     row.children().eq(3).attr("id",data.positionObjName);
-    //     row.children().eq(4).text(data.phone);
-    //     row.children().eq(5).attr("id",data.bankId)
-    //     row.children().eq(5).text(data.bankName);
-    // }
-    // else if($("#client").hasClass("active") === true) {
-    //     row.children().eq(2).text(data.fio);
-    //     row.children().eq(3).text(data.phoneNumber);
-    //     row.children().eq(4).text(data.address);
-    //     row.children().eq(5).text(data.email);
-    //     row.children().eq(6).attr("id",data.bankId)
-    //     row.children().eq(6).text(data.bankName);
-    // }
-    // else if($("#account").hasClass("active") === true) {
-    //     row.children().eq(2).text(data.login);
-    //     row.children().eq(3).text(data.password);
-    //     row.children().eq(4).text(data.currency);
-    //     row.children().eq(5).attr("id",data.clientId)
-    //     row.children().eq(5).text(data.clientFIO);
-    // }
     row.removeClass('selectedToDelete');
     row.removeClass('selectedToEdit');
-    //$('#customCheck'+data.id+'').prop("checked",false);
     console.log("Edit");
 }
 //-----------------------------------------------//
