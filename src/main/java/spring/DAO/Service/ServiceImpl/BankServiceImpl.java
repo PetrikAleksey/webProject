@@ -52,14 +52,14 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public Bank getBank(Long id) {
-        return bankRepository.getOne(id);
+    public Bank getById(Long id) {
+        return bankRepository.getBankById(id);
     }
 
     @Override
     @Transactional
     public void deleteSelected(List<Long> list) {
-        bankRepository.deleteAllById(list);
+        bankRepository.deleteAllByid(list);
     }
 
     @Override

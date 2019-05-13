@@ -7,6 +7,7 @@ function sendAjax(url,type,data,callback) {
         mimeType: 'application/json',
         data : data,
         success: function (data) {
+            console.log(data);
             callback(data);
         }
     });
@@ -372,10 +373,10 @@ function doEdit() {
 function successEdit(data) {
 
     var table = $('#result_table_id').DataTable();
-    var rows = table.row( '.selectedToEdit' );
-    //var row = $('#result_table_id tbody').children('.selectedToEdit')
+    var rowEdit = table.row( '.selectedToEdit' );
+    var row = $('#result_table_id tbody').children('.selectedToEdit')
 
-    rows.data(data).draw();
+    rowEdit.data(data).draw();
 
     //var row =  $('#tr'+data.id+'');
     //var table = $('#result_table_id').DataTable();
@@ -416,44 +417,44 @@ function successEdit(data) {
 }
 //-----------------------------------------------//
 //--------------------Списки---------------------//
-// function successlistPosition(data) {
-//     var option = "";
-//     if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
-//         var tr = $('.selectedToEdit').children();
-//         var positionId = $(tr, this).eq(3).attr("id");
-//     }
-//     $.each(data, function( key, value ) {
-//         if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
-//             option = "<option selected value="+key+">"+value+"</option>";
-//         }else
-//             option = "<option value="+key+">"+value+"</option>";
-//         $('#select-position').append(option);
-//     });
-// }
-//
-// function successlistBank(data) {
-//     var option = "";
-//     var bankId = "";
-//     //var bankName = "";
-//     if ($('.buttonEdit').hasClass("active") === true){
-//         var tr = $('.selectedToEdit').children();
-//         if($('#worker').hasClass("active") === true) {
-//             bankId = $(tr, this).eq(5).attr("id");
-//             //bankName = $(tr, this).eq(5).text();
-//         }
-//         else if ($('#client').hasClass("active") === true){
-//             bankId = $(tr, this).eq(6).attr("id");
-//             //bankName = $(tr, this).eq(6).text();
-//         }
-//     }
-//     $.each(data, function( key, value ) {
-//         if ($('.buttonEdit').hasClass("active") === true && (($('#worker').hasClass("active") === true) || ($('#client').hasClass("active") === true)) && value.id === bankId) {
-//             option = "<option selected value=" + value.id + ">" + value.name + "</option>";
-//         }else
-//             option = "<option value="+value.id+">"+value.name+"</option>";
-//         $('#select-bank').append(option);
-//     });
-// }
+function successlistPosition(data) {
+    var option = "";
+    if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
+        var tr = $('.selectedToEdit').children();
+        var positionId = $(tr, this).eq(3).attr("id");
+    }
+    $.each(data, function( key, value ) {
+        if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
+            option = "<option selected value="+key+">"+value+"</option>";
+        }else
+            option = "<option value="+key+">"+value+"</option>";
+        $('#select-position').append(option);
+    });
+}
+
+function successlistBank(data) {
+    var option = "";
+    var bankId = "";
+    //var bankName = "";
+    if ($('.buttonEdit').hasClass("active") === true){
+        var tr = $('.selectedToEdit').children();
+        if($('#worker').hasClass("active") === true) {
+            bankId = $(tr, this).eq(5).attr("id");
+            //bankName = $(tr, this).eq(5).text();
+        }
+        else if ($('#client').hasClass("active") === true){
+            bankId = $(tr, this).eq(6).attr("id");
+            //bankName = $(tr, this).eq(6).text();
+        }
+    }
+    $.each(data, function( key, value ) {
+        if ($('.buttonEdit').hasClass("active") === true && (($('#worker').hasClass("active") === true) || ($('#client').hasClass("active") === true)) && value.id === bankId) {
+            option = "<option selected value=" + value.id + ">" + value.name + "</option>";
+        }else
+            option = "<option value="+value.id+">"+value.name+"</option>";
+        $('#select-bank').append(option);
+    });
+}
 
 function successlistClient(data) {
     var option = "";
@@ -533,172 +534,226 @@ $('.buttonEdit').on('click',function () {
 
 //----------------Модальное окно-----------------//
 function addContent() {
-    // var modelContent = "\t<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n" +
-    //     "\t\t<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
-    //     "\t\t\t<div class=\"modal-content\">\n" +
-    //     "\t\t\t\t<div class=\"modal-header\">\n" +
-    //     "\t\t\t\t\t<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>\n" +
-    //     "\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" onclick=closeModel()>\n" +
-    //     "\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\n" +
-    //     "\t\t\t\t\t</button>\n" +
-    //     "\t\t\t\t</div>\n" +
-    //     "\t\t\t\t<div class=\"modal-body\">\n" +
-    //     "\t\t\t\t</div>\n" +
-    //     "\t\t\t\t<div class=\"modal-footer\">\n" +
-    //     "\t\t\t\t\t<button type=\"button\" id=\"saveModified\" class=\"btn btn-success\" data-dismiss=\"modal\"></button>\n" +
-    //     "\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" onclick=closeModel()>Закрыть</button>\n" +
-    //     "\t\t\t\t</div>\n" +
-    //     "\t\t\t</div>\n" +
-    //     "\t\t</div>\n" +
-    //     "\t</div>"
-    // $('.addContent').append(modelContent);
-    //
-    // $('#saveModified').on('click',function () {
-    //     if ($('.buttonEdit').hasClass("active") === true){
-    //         doEdit();
-    //     } else if($('.buttonAdd').hasClass("active") === true) {
-    //         doAdd();
-    //     }
-    // });
-    // var input = "";
-    // var nameModal = "";
-    // var nameButton = "";
+    var modelContent = "\t<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n" +
+        "\t\t<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
+        "\t\t\t<div class=\"modal-content\">\n" +
+        "\t\t\t\t<div class=\"modal-header\">\n" +
+        "\t\t\t\t\t<h5 class=\"modal-title\" id=\"exampleModalLabel\"></h5>\n" +
+        "\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" onclick=closeModel()>\n" +
+        "\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\n" +
+        "\t\t\t\t\t</button>\n" +
+        "\t\t\t\t</div>\n" +
+        "\t\t\t\t<div class=\"modal-body\">\n" +
+        "\t\t\t\t</div>\n" +
+        "\t\t\t\t<div class=\"modal-footer\">\n" +
+        "\t\t\t\t\t<button type=\"button\" id=\"saveModified\" class=\"btn btn-success\" data-dismiss=\"modal\"></button>\n" +
+        "\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" onclick=closeModel()>Закрыть</button>\n" +
+        "\t\t\t\t</div>\n" +
+        "\t\t\t</div>\n" +
+        "\t\t</div>\n" +
+        "\t</div>"
+    $('.addContent').append(modelContent);
+
+    $('#saveModified').on('click',function () {
+        if ($('.buttonEdit').hasClass("active") === true){
+            doEdit();
+        } else if($('.buttonAdd').hasClass("active") === true) {
+            doAdd();
+        }
+    });
+    var input = "";
+    var nameModal = "";
+    var nameButton = "";
 
     if ($('.buttonEdit').hasClass("active") === true){
-        console.log("Изменить");
-        var tr = $('.selectedToEdit').children();
-        nameModal = "Изменить";
         nameButton = "Сохранить изменения";
-        $('#exampleModalLabel').text(nameModal);
-        $('#saveModified').text(nameButton);
-        if($("#bank").hasClass("active") === true) {
-            var id = $(tr, this).eq(1).text();
-            var name = $(tr, this).eq(2).text();
 
-            input += "<label for=\"name_bank\">Название банка</label>" +
-                "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='"+name+"' type=\"text\" maxlength=\"50\"/>";
-        }
-        else if($("#worker").hasClass("active") === true) {
-            var id = $(tr, this).eq(1).text();
-            var fio = $(tr, this).eq(2).text();
-            var phone = $(tr, this).eq(4).text();
-
-            input += "<label for=\"fio\">ФИО</label>" +
-                "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='"+fio+"' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"select-position\">Должность</label>" +
-                "<select class=\"custom-select\" id=\"select-position\"></select>";
-            $('.modal-body').append(input);
-            sendAjax('listPosition', 'GET', "", successlistPosition);
-            input = "<label class='label-modal' for=\"phone\">Телефон</label>" +
-                "<input type=\"tel\" name=\"phone\" id=\"phone\" class=\"form-control\" value='"+phone+"' placeholder=\"+375293333333\" maxlength=\"13\">";
-            input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
-                "<select class=\"custom-select\" id=\"select-bank\"></select>";
-            $('.modal-body').append(input);
-            sendAjax('loadBank', 'GET', "", successlistBank);
-            input = "";
-        }
-        else if($("#client").hasClass("active") == true) {
-            var id = $(tr, this).eq(1).text();
-            var fio = $(tr, this).eq(2).text();
-            var phoneNumber = $(tr, this).eq(3).text();
-            var address = $(tr, this).eq(4).text();
-            var email = $(tr, this).eq(5).text();
-
-            input = "<label for=\"fio\">ФИО</label>" +
-                "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='"+fio+"' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"phoneNumber\">Телефон</label>" +
-                "<input type=\"tel\" name=\"phoneNumber\" id=\"phoneNumber\" value='"+phoneNumber+"' class=\"form-control\" placeholder=\"+375293333333\" maxlength=\"13\">";
-            input += "<label class='label-modal' for=\"address\">Адрес</label>" +
-                "<input  class=\"form-control\"  id=\"address\" name=\"address\" value='"+address+"' type=\"text\" placeholder=\"Адрес\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"email\">Email</label>" +
-                "<input  class=\"form-control\"  id=\"email\" name=\"email\" value='"+email+"' type=\"email\" placeholder=\"test@mail.ru\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
-                "<select class=\"custom-select\" id=\"select-bank\"></select>";
-            $('.modal-body').append(input);
-            sendAjax('loadBank', 'GET', "", successlistBank);
-            input = "";
-        }
-        else if($("#account").hasClass("active") === true) {
-            var id = $(tr, this).eq(1).text();
-            var login = $(tr, this).eq(2).text();
-            var password = $(tr, this).eq(3).text();
-            var currency = $(tr, this).eq(4).text();
-
-            input = "<label for=\"login\">Логин</label>" +
-                "<input  class=\"form-control\"  id=\"login\" name=\"login\" value='"+login+"' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"password\">Пароль</label>" +
-                "<input  class=\"form-control\"  id=\"password\" name=\"password\" value='"+password+"' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
-            input += "<label class='label-modal' for=\"currency\">Кол-во денежных средств</label>" +
-                "<input  class=\"form-control\"  id=\"currency\" name=\"currency\" value='"+currency+"' type=\"number\" placeholder=\"\" maxlength=\"20\"/>";
-            input += "<label class='label-modal' for=\"select-client\">Клиент</label>" +
-                "<select class=\"custom-select\" id=\"select-client\"></select>";
-            $('.modal-body').append(input);
-            sendAjax('loadClient', 'GET', "", successlistClient);
-            input = "";
-        }
-    } else if($('.buttonAdd').hasClass("active") === true) {
-        // nameModal = "Добавление";
-        // nameButton = "Добавить";
+        var tr = $('.selectedToEdit').children();
+        var id = $(tr, this).eq(1).text();
 
         if($("#bank").hasClass("active") === true) {
-            console.log("Добавить банк");
-            //var name = "";
-            // input += "<label for=\"name_bank\">Название банка</label>" +
-            //     "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='' type=\"text\" maxlength=\"50\"/>";
-            sendAjax('bankModalAdd', 'GET', "", function (data) {
-                console.log("Зашли");
-                var d = data;
-                $('.addContent').append(d);
+            sendAjax('getBank', 'POST', JSON.stringify(id), function (data) {
+                console.log("Изменить данные банка");
+                nameModal = "Изменить данные банка";
+
+                var name = data.name;
+
+                input += "<label for=\"name_bank\">Название банка</label>" +
+                    "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='"+name+"' type=\"text\" maxlength=\"50\"/>";
+
+                $('#exampleModalLabel').text(nameModal);
+                $('.modal-body').append(input);
+                input = "";
             });
         }
         else if($("#worker").hasClass("active") === true) {
+            sendAjax('getWorker', 'POST', JSON.stringify(id), function (data) {
+                console.log("Изменить данные работника");
+                nameModal = "Изменить данные работника";
+
+                var fio = data.fio;
+                var phone = data.phone;
+
+                input += "<label for=\"fio\">ФИО</label>" +
+                    "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='"+fio+"' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"select-position\">Должность</label>" +
+                    "<select class=\"custom-select\" id=\"select-position\"></select>";
+
+                input = "<label class='label-modal' for=\"phone\">Телефон</label>" +
+                    "<input type=\"tel\" name=\"phone\" id=\"phone\" class=\"form-control\" value='"+phone+"' placeholder=\"+375293333333\" maxlength=\"13\">";
+
+                input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
+                    "<select class=\"custom-select\" id=\"select-bank\"></select>";
+
+                $('#exampleModalLabel').text(nameModal);
+                $('.modal-body').append(input);
+                sendAjax('listPosition', 'GET', "", successlistPosition);
+                sendAjax('loadBank', 'GET', "", successlistBank);
+                input = "";
+            });
+        }
+        else if($("#client").hasClass("active") === true) {
+            sendAjax('getClient', 'POST', JSON.stringify(id), function (data) {
+                console.log("Изменить данные клиента");
+                nameModal = "Изменить данные клиента";
+
+                var fio = data.fio;
+                var phoneNumber = data.phoneNumber;
+                var address = data.address;
+                var email = data.email;
+
+                input = "<label for=\"fio\">ФИО</label>" +
+                    "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='" + fio + "' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"phoneNumber\">Телефон</label>" +
+                    "<input type=\"tel\" name=\"phoneNumber\" id=\"phoneNumber\" value='" + phoneNumber + "' class=\"form-control\" placeholder=\"+375293333333\" maxlength=\"13\">";
+
+                input += "<label class='label-modal' for=\"address\">Адрес</label>" +
+                    "<input  class=\"form-control\"  id=\"address\" name=\"address\" value='" + address + "' type=\"text\" placeholder=\"Адрес\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"email\">Email</label>" +
+                    "<input  class=\"form-control\"  id=\"email\" name=\"email\" value='" + email + "' type=\"email\" placeholder=\"test@mail.ru\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
+                    "<select class=\"custom-select\" id=\"select-bank\"></select>";
+
+                $('#exampleModalLabel').text(nameModal);
+                $('.modal-body').append(input);
+                sendAjax('loadBank', 'GET', "", successlistBank);
+                input = "";
+            });
+        }
+        else if($("#account").hasClass("active") === true) {
+            sendAjax('getBankAccount', 'POST', JSON.stringify(id), function (data) {
+                console.log("Изменить данные аккаунта");
+                nameModal = "Изменить данные аккаунта";
+
+                var login = data.login;
+                var password = data.password;
+                var currency = data.currency;
+
+                input = "<label for=\"login\">Логин</label>" +
+                    "<input  class=\"form-control\"  id=\"login\" name=\"login\" value='" + login + "' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"password\">Пароль</label>" +
+                    "<input  class=\"form-control\"  id=\"password\" name=\"password\" value='" + password + "' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
+
+                input += "<label class='label-modal' for=\"currency\">Кол-во денежных средств</label>" +
+                    "<input  class=\"form-control\"  id=\"currency\" name=\"currency\" value='" + currency + "' type=\"number\" placeholder=\"\" maxlength=\"20\"/>";
+
+                input += "<label class='label-modal' for=\"select-client\">Клиент</label>" +
+                    "<select class=\"custom-select\" id=\"select-client\"></select>";
+
+                $('#exampleModalLabel').text(nameModal);
+                $('.modal-body').append(input);
+                sendAjax('loadClient', 'GET', "", successlistClient);
+                input = "";
+            });
+        }
+    } else if($('.buttonAdd').hasClass("active") === true) {
+        nameButton = "Добавить";
+
+        if($("#bank").hasClass("active") === true) {
+            console.log("Добавить банк");
+            nameModal = "Добавить новый банк";
+
+            input += "<label for=\"name_bank\">Название банка</label>" +
+                "<input class=\"form-control\" id=\"name_bank\" name=\"bank\" value='' type=\"text\" maxlength=\"50\"/>";
+
+            $('#exampleModalLabel').text(nameModal);
+            $('.modal-body').append(input);
+            input = "";
+        }
+        else if($("#worker").hasClass("active") === true) {
+            console.log("Добавить работника");
+            nameModal = "Добавить нового работника";
+
             input += "<label for=\"fio\">ФИО</label>" +
                 "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"select-position\">Должность</label>" +
                 "<select class=\"custom-select\" id=\"select-position\"></select>";
-            $('.modal-body').append(input);
-            sendAjax('listPosition', 'GET', "", successlistPosition);
+
             input = "<label class='label-modal' for=\"phone\">Телефон</label>" +
                 "<input type=\"tel\" name=\"phone\" id=\"phone\" class=\"form-control\" placeholder=\"+375293333333\" maxlength=\"13\">";
+
             input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
                 "<select class=\"custom-select\" id=\"select-bank\"></select>";
+
+            $('#exampleModalLabel').text(nameModal);
             $('.modal-body').append(input);
+            sendAjax('listPosition', 'GET', "", successlistPosition);
             sendAjax('loadBank', 'GET', "", successlistBank);
             input = "";
         }
         else if($("#client").hasClass("active") === true) {
+            console.log("Добавить клиента");
+            nameModal = "Добавить нового клиента";
+
             input = "<label for=\"fio\">ФИО</label>" +
                 "<input  class=\"form-control\"  id=\"fio\" name=\"fio\" value='' type=\"text\" placeholder=\"ФИО\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"phoneNumber\">Телефон</label>" +
                 "<input type=\"tel\" name=\"phoneNumber\" id=\"phoneNumber\" class=\"form-control\" placeholder=\"+375293333333\" maxlength=\"13\">";
+
             input += "<label class='label-modal' for=\"address\">Адрес</label>" +
                 "<input  class=\"form-control\"  id=\"address\" name=\"address\" value='' type=\"text\" placeholder=\"Адрес\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"email\">Email</label>" +
                 "<input  class=\"form-control\"  id=\"email\" name=\"email\" value='' type=\"email\" placeholder=\"test@mail.ru\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
                 "<select class=\"custom-select\" id=\"select-bank\"></select>";
+
+            $('#exampleModalLabel').text(nameModal);
             $('.modal-body').append(input);
             sendAjax('loadBank', 'GET', "", successlistBank);
             input = "";
         }
         else if($("#account").hasClass("active") === true) {
+            console.log("Добавить аккаунт");
+            nameModal = "Добавить новый аккаунт";
+
             input = "<label for=\"login\">Логин</label>" +
                 "<input  class=\"form-control\"  id=\"login\" name=\"login\" value='' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"password\">Пароль</label>" +
                 "<input  class=\"form-control\"  id=\"password\" name=\"password\" value='' type=\"text\" placeholder=\"\" maxlength=\"50\"/>";
+
             input += "<label class='label-modal' for=\"currency\">Кол-во денежных средств</label>" +
                 "<input  class=\"form-control\"  id=\"currency\" name=\"currency\" value='' type=\"number\" placeholder=\"\" maxlength=\"20\"/>";
+
             input += "<label class='label-modal' for=\"select-client\">Клиент</label>" +
                 "<select class=\"custom-select\" id=\"select-client\"></select>";
+
+            $('#exampleModalLabel').text(nameModal);
             $('.modal-body').append(input);
             sendAjax('loadClient', 'GET', "", successlistClient);
             input = "";
         }
     }
-    // $('#exampleModalLabel').text(nameModal);
-    // $('#saveModified').text(nameButton);
-    // $('.modal-body').append(input);
-
+    $('#saveModified').text(nameButton);
     console.log("Load Modal");
 }
 

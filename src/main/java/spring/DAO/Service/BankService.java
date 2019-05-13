@@ -12,7 +12,7 @@ public interface BankService {
     Bank getByName(String name);
     Bank editBank(Bank bank);
     List<Bank> getAll();
-    Bank getBank(Long id);
+    Bank getById(Long id);
     void deleteSelected(List<Long> list);
     List<Bank> searchBank(String name);
 }

@@ -55,17 +55,27 @@ public class BankController {
 		return gson.toJson(list);
 	}
 
+	@RequestMapping(value="/getBank", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
+	@ResponseBody
+	public String getBank(@RequestBody Long id) {
+		System.out.println("done1");
+		Bank bank = bankService.getById(id);
+		System.out.println("done2");
+		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
+		return gson.toJson(bank);
+	}
+
 	 @RequestMapping(value = "/bank", method = RequestMethod.GET)
 	 public String bank(Locale locale, Model model) {
 	  return "bank";
 	 }
 
-	@RequestMapping(value = "/bankModalAdd", method = RequestMethod.GET)
-	public String bankModalAdd(Locale locale, Model model) {
-	    System.out.println("Done");
-
-	    return "bankModalAdd";
-	}
+//	@RequestMapping(value = "/bankModalAdd", method = RequestMethod.GET)
+//	public String bankModalAdd(Locale locale, Model model) {
+//	    System.out.println("Done");
+//
+//	    return "bankModalAdd";
+//	}
 	
 }
 
