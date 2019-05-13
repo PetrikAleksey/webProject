@@ -63,4 +63,11 @@ public class BankAccountController {
         return gson.toJson(list);
     }
 
+    @RequestMapping(value="/getBankAccount", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
+    @ResponseBody
+    public String getWorker(@RequestBody Long id) {
+        BankAccount client = bankAccountService.getById(id);
+        Gson gson = new GsonBuilder().registerTypeAdapter(BankAccount.class, new BankAccountConverter()).create();
+        return gson.toJson(client);
+    }
 }

@@ -18,6 +18,8 @@ public interface WorkerRepository extends JpaRepository<Worker,Long> {
     //@Query("select w from Worker w where w.fio like %:fio%")
     List<Worker> findAllByFioLike(@Param("strSearch") String strSearch);
 
+    Worker getWorkerById(Long id);
+
     @Transactional
     @Modifying
     @Query("delete from Worker w where w.id in (:list)")

@@ -11,5 +11,4 @@ public interface ClientService {
     List<Client> getAll();
     void deleteSelected(List<Long> list);
     Client getById(Long id);
-
 }

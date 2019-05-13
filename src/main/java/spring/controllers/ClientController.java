@@ -70,7 +70,5 @@ public class ClientController {
         Client client = clientService.getById(id);
         Gson gson = new GsonBuilder().registerTypeAdapter(Client.class, new ClientConverter()).create();
         return gson.toJson(client);
-
     }
-
 }

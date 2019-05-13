@@ -43,4 +43,9 @@ public class WorkerServiceImpl implements WorkerService {
     public List<Worker> searchWorker(String str) {
         return workerRepository.findAllByFioLike(str);
     }
+
+    @Override
+    public Worker getById(Long id) {
+        return workerRepository.getWorkerById(id);
+    }
 }

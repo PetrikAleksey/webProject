@@ -11,4 +11,5 @@ public interface WorkerService {
     List<Worker> getAll();
     void deleteSelected(List<Long> list);
     List<Worker> searchWorker(String str);
+    Worker getById(Long id);
 }

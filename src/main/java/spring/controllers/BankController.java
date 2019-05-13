@@ -58,9 +58,7 @@ public class BankController {
 	@RequestMapping(value="/getBank", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
 	@ResponseBody
 	public String getBank(@RequestBody Long id) {
-		System.out.println("done1");
 		Bank bank = bankService.getById(id);
-		System.out.println("done2");
 		Gson gson = new GsonBuilder().registerTypeAdapter(Bank.class, new BankConverter()).create();
 		return gson.toJson(bank);
 	}

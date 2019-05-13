@@ -63,4 +63,12 @@ public class WorkerController {
         Gson gson = new GsonBuilder().registerTypeAdapter(Worker.class, new WorkerConverter()).create();
         return gson.toJson(list);
     }
+
+    @RequestMapping(value="/getWorker", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})
+    @ResponseBody
+    public String getWorker(@RequestBody Long id) {
+        Worker client = workerService.getById(id);
+        Gson gson = new GsonBuilder().registerTypeAdapter(Worker.class, new WorkerConverter()).create();
+        return gson.toJson(client);
+    }
 }

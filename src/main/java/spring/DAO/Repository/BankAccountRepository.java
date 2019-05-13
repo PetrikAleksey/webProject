@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount,Long> {
 
+    BankAccount getBankAccountById(Long id);
+
     @Transactional
     @Modifying
     @Query("delete from BankAccount ba where ba.id in (:list)")

@@ -600,7 +600,7 @@ function addContent() {
                 input += "<label class='label-modal' for=\"select-position\">Должность</label>" +
                     "<select class=\"custom-select\" id=\"select-position\"></select>";
 
-                input = "<label class='label-modal' for=\"phone\">Телефон</label>" +
+                input += "<label class='label-modal' for=\"phone\">Телефон</label>" +
                     "<input type=\"tel\" name=\"phone\" id=\"phone\" class=\"form-control\" value='"+phone+"' placeholder=\"+375293333333\" maxlength=\"13\">";
 
                 input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +
@@ -695,7 +695,7 @@ function addContent() {
             input += "<label class='label-modal' for=\"select-position\">Должность</label>" +
                 "<select class=\"custom-select\" id=\"select-position\"></select>";
 
-            input = "<label class='label-modal' for=\"phone\">Телефон</label>" +
+            input += "<label class='label-modal' for=\"phone\">Телефон</label>" +
                 "<input type=\"tel\" name=\"phone\" id=\"phone\" class=\"form-control\" placeholder=\"+375293333333\" maxlength=\"13\">";
 
             input += "<label class='label-modal' for=\"select-bank\">Банк</label>" +

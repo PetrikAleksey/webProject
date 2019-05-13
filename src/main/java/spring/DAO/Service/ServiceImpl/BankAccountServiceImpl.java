@@ -39,4 +39,9 @@ public class BankAccountServiceImpl implements BankAccountService {
     public void deleteSelected(List<Long> list) {
         bankAccountRepository.deleteAllById(list);
     }
+
+    @Override
+    public BankAccount getById(Long id) {
+        return bankAccountRepository.getBankAccountById(id);
+    }
 }
