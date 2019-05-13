@@ -35,8 +35,8 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public void deleteSelected(List<Worker> listWorker) {
-        workerRepository.deleteAll(listWorker);
+    public void deleteSelected(List<Long> list) {
+        workerRepository.deleteAllById(list);
     }
 
     @Override

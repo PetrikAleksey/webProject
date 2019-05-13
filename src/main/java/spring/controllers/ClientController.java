@@ -40,10 +40,12 @@ public class ClientController {
 
     @RequestMapping(value="/deleteClientAll", method=RequestMethod.POST,produces = {"application/json; charset=utf-8;"})//,consumes = MediaType.APPLICATION_JSON_VALUE)//produces = {"application/json; charset=utf-8;"})
     @ResponseBody
-    public String deleteClientAll(@RequestBody List<Client> listClient) {
+    public void deleteClientAll(@RequestBody List<String> list) {
+        List<Long> longList = new ArrayList<>();
+        for(String s : list) longList.add(Long.valueOf(s));
         //listBank.forEach(System.out::println);
-        clientService.deleteSelected(listClient);
-        return new Gson().toJson(listClient);
+        clientService.deleteSelected(longList);
+        //return new Gson().toJson(listClient);
     }
 
     @RequestMapping(value="/editClient", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})

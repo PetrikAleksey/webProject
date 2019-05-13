@@ -35,8 +35,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteSelected(List<Client> listClient) {
-        clientRepository.deleteAll(listClient);
+    public void deleteSelected(List<Long> list) {
+        clientRepository.deleteAllById(list);
     }
 
     @Override

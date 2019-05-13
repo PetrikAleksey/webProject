@@ -11,6 +11,17 @@ function sendAjax(url,type,data,callback) {
         }
     });
 }
+function sendAjaxNoData(url,type,data,callback) {
+    $.ajax({
+        url : url,
+        type: type,
+        dataType: 'json',
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        data : data,
+        success: callback()
+    });
+}
 //------------------Добавить---------------------//
 function doAdd() {
 
@@ -117,68 +128,26 @@ function successAdd(data){
 function doAllSelectedDelete() {
     var mass = []
     var allToDelete = $('.selectedToDelete');
+    for (i = 0; i < allToDelete.length; i++) {
+        var id = $(allToDelete[i], this).children().eq(1).text();
+        mass.push(id);
+    }
 
     if($("#bank").hasClass("active") === true) {
-        for (i = 0; i < allToDelete.length; i++) {
-            // var bank = {};
-            // bank.id = $(allToDelete[i], this).children().eq(1).text();
-            // bank.name = $(allToDelete[i], this).children().eq(2).text();
-            var id = $(allToDelete[i], this).children().eq(1).text();
-            mass.push(id);
-        }
-        sendAjax('deleteBankAll', 'POST', JSON.stringify(mass), successDelete);
+        sendAjaxNoData('deleteBankAll', 'POST', JSON.stringify(mass), successDelete);
     }
     else if($("#worker").hasClass("active") === true) {
-        for (i = 0; i < allToDelete.length; i++) {
-            var worker = {};
-            var bank = {};
-            worker.id = $(allToDelete[i], this).children().eq(1).text();
-            worker.fio = $(allToDelete[i], this).children().eq(2).text();
-            worker.position = $(allToDelete[i], this).children().eq(3).attr("id");
-            worker.phone = $(allToDelete[i], this).children().eq(4).text();
-            bank.id = $(allToDelete[i], this).children().eq(5).attr("id");
-            bank.name = $(allToDelete[i], this).children().eq(5).text();
-            worker.bank = bank;
-            mass.push(worker);
-        }
-        sendAjax('deleteWorkerAll', 'POST', JSON.stringify(mass), successDelete);
+        sendAjaxNoData('deleteWorkerAll', 'POST', JSON.stringify(mass), successDelete);
     }
     else if($("#client").hasClass("active") === true) {
-        for (i = 0; i < allToDelete.length; i++) {
-            var client = {};
-            var bank = {};
-            client.id = $(allToDelete[i], this).children().eq(1).text();
-            client.fio = $(allToDelete[i], this).children().eq(2).text();
-            client.phoneNumber = $(allToDelete[i], this).children().eq(3).text();
-            client.address = $(allToDelete[i], this).children().eq(4).text();
-            client.email = $(allToDelete[i], this).children().eq(5).text();
-            bank.id = $(allToDelete[i], this).children().eq(6).attr("id");
-            bank.name = $(allToDelete[i], this).children().eq(6).text();
-            client.bank = bank;
-            mass.push(client);
-        }
-        sendAjax('deleteClientAll', 'POST', JSON.stringify(mass), successDelete);
+        sendAjaxNoData('deleteClientAll', 'POST', JSON.stringify(mass), successDelete);
     }
     else if($("#account").hasClass("active") === true) {
-        for (i = 0; i < allToDelete.length; i++) {
-            var bankAccount = {};
-            bankAccount.id = $(allToDelete[i], this).children().eq(1).text();
-            bankAccount.login = $(allToDelete[i], this).children().eq(2).text();
-            bankAccount.password = $(allToDelete[i], this).children().eq(3).text();
-            bankAccount.currency = $(allToDelete[i], this).children().eq(4).text();
-            var client = {};
-            var idClient = $(allToDelete[i], this).children().eq(5).attr("id");
-            sendAjax('getClient', 'POST', JSON.stringify(idClient), function (data) {
-                client = data;
-            });
-            bankAccount.client = client;
-            mass.push(bankAccount);
-        }
-        sendAjax('deleteBankAccountAll', 'POST', JSON.stringify(mass), successDelete);
+        sendAjaxNoData('deleteBankAccountAll', 'POST', JSON.stringify(mass), successDelete);
     }
 }
 
-function successDelete(data) {
+function successDelete() {
     var table = $('#result_table_id').DataTable();
     var rows = table.rows( '.selectedToDelete' );
     rows.remove().draw();

@@ -9,7 +9,7 @@ public interface ClientService {
     Client addClient(Client client);
     Client editClient(Client client);
     List<Client> getAll();
-    void deleteSelected(List<Client> listClient);
+    void deleteSelected(List<Long> list);
     Client getById(Long id);
 
 }

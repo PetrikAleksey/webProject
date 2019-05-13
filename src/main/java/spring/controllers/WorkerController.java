@@ -45,10 +45,12 @@ public class WorkerController {
 
     @RequestMapping(value="/deleteWorkerAll", method=RequestMethod.POST,produces = {"application/json; charset=utf-8;"})//,consumes = MediaType.APPLICATION_JSON_VALUE)//produces = {"application/json; charset=utf-8;"})
     @ResponseBody
-    public String deleteWorkerAll(@RequestBody List<Worker> listWorker) {
-        //listBank.forEach(System.out::println);
-        workerService.deleteSelected(listWorker);
-        return new Gson().toJson(listWorker);
+    public void deleteWorkerAll(@RequestBody List<String> list) {
+        List<Long> longList = new ArrayList<>();
+        for(String s : list) longList.add(Long.valueOf(s));
+        //longList.forEach(System.out::println);
+        workerService.deleteSelected(longList);
+        //return new Gson().toJson(list);
     }
 
     @RequestMapping(value="/editWorker", method=RequestMethod.POST, produces = {"application/json; charset=utf-8;"})

@@ -59,7 +59,7 @@ public class BankServiceImpl implements BankService {
     @Override
     @Transactional
     public void deleteSelected(List<Long> list) {
-        bankRepository.deleteAbc(list);
+        bankRepository.deleteAllById(list);
     }
 
     @Override

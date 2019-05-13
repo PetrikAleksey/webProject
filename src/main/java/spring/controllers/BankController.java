@@ -39,14 +39,11 @@ public class BankController {
 
 	@RequestMapping(value="/deleteBankAll", method=RequestMethod.POST,produces = {"application/json; charset=utf-8;"})//,consumes = MediaType.APPLICATION_JSON_VALUE)//produces = {"application/json; charset=utf-8;"})
 	@ResponseBody
-	public String deleteBankAll(@RequestBody List<String> list) {
+	public void deleteBankAll(@RequestBody List<String> list) {
 		List<Long> longList = new ArrayList<>();
 		for(String s : list) longList.add(Long.valueOf(s));
-		longList.forEach(System.out::println);
-		System.out.println("123");
+		//longList.forEach(System.out::println);
 		bankService.deleteSelected(longList);
-		System.out.println("124");
-		return new Gson().toJson(longList);
 	}
 
 	@RequestMapping(value="/loadBank", method=RequestMethod.GET, produces = {"application/json; charset=utf-8;"})

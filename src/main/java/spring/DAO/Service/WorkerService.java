@@ -9,6 +9,6 @@ public interface WorkerService {
     Worker addWorker(Worker worker);
     Worker editWorker(Worker worker);
     List<Worker> getAll();
-    void deleteSelected(List<Worker> listWorker);
+    void deleteSelected(List<Long> list);
     List<Worker> searchWorker(String str);
 }
