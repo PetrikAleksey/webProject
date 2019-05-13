@@ -68,6 +68,11 @@ public class BankController {
 	  return "bank";
 	 }
 
+	@RequestMapping(value = "/testModal", method = RequestMethod.GET)
+	public String testModal(Locale locale, Model model) {
+		return "testModal";
+	}
+
 //	@RequestMapping(value = "/bankModalAdd", method = RequestMethod.GET)
 //	public String bankModalAdd(Locale locale, Model model) {
 //	    System.out.println("Done");

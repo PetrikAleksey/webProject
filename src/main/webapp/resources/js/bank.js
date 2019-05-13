@@ -385,15 +385,20 @@ function successEdit(data) {
 //-----------------------------------------------//
 //--------------------Списки---------------------//
 function successlistPosition(data) {
+    // var option = "";
+    // if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
+    //     var tr = $('.selectedToEdit').children();
+    //     var positionId = $(tr, this).eq(3).attr("id");
+    // }
+    // $.each(data, function( key, value ) {
+    //     if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
+    //         option = "<option selected value="+key+">"+value+"</option>";
+    //     }else
+    //         option = "<option value="+key+">"+value+"</option>";
+    //     $('#select-position').append(option);
+    // });
     var option = "";
-    if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true) {
-        var tr = $('.selectedToEdit').children();
-        var positionId = $(tr, this).eq(3).attr("id");
-    }
     $.each(data, function( key, value ) {
-        if ($('.buttonEdit').hasClass("active") === true && $('#worker').hasClass("active") === true && key === positionId){
-            option = "<option selected value="+key+">"+value+"</option>";
-        }else
             option = "<option value="+key+">"+value+"</option>";
         $('#select-position').append(option);
     });
@@ -499,6 +504,20 @@ $('.buttonEdit').on('click',function () {
 });
 //-----------------------------------------------//
 
+function testModalAdd() {
+    sendTestAjax('workerModalAdd', 'GET', "", function (html) {
+        var m = $("#exampleModal");
+        m.empty();
+        $.when($('#exampleModal').append(html)).then(function () {
+            $("#exampleModal").modal();
+        });
+
+        // m.html(html).ready(function () {
+        //     $("#exampleModal").modal();
+        // });
+    });
+}
+
 //----------------Модальное окно-----------------//
 function addContent() {
     var modelContent = "\t<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n" +
@@ -576,6 +595,9 @@ function addContent() {
                 $('#exampleModalLabel').text(nameModal);
                 $('.modal-body').append(input);
                 sendAjax('listPosition', 'GET', "", successlistPosition);
+                // if (data.positionObjName === ){
+                //
+                // }
                 sendAjax('loadBank', 'GET', "", successlistBank);
                 input = "";
             });

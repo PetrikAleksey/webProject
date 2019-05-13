@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import spring.DAO.Model.Converters.WorkerConverter;
 import spring.DAO.Model.Enum.Position;
 import spring.DAO.Model.Worker;
@@ -15,6 +16,8 @@ import java.util.*;
 
 @Controller
 public class WorkerController {
+
+    public static String WORKER_MODAL_ADD = "workerModalAdd";
 
     @Autowired
     public WorkerService workerService;
@@ -71,4 +74,13 @@ public class WorkerController {
         Gson gson = new GsonBuilder().registerTypeAdapter(Worker.class, new WorkerConverter()).create();
         return gson.toJson(client);
     }
+
+
+    @GetMapping(value="/workerModalAdd")
+    public ModelAndView workerModalAdd() {
+        ModelAndView m = new ModelAndView();
+        m.setViewName(WORKER_MODAL_ADD);
+        return m;
+    }
+
 }

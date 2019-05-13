@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<jsp:include page="headConfig.jsp"/>
 <title>CRUD Bank</title>
+	<jsp:include page="headConfig.jsp"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link type="text/css" href="<c:url value='/resources/css/style.css' />" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
@@ -38,7 +38,26 @@
  		</table>
  	</div>
 	<!-- Модальное окно -->
-	<div class="addContent"></div>
+	<div id="testModal" class="addContent">
+		<p><a href="#myModal2" id="btn2" class="btn btn-primary">Открыть модальное окно 2</a></p>
+		<div id="myModal2" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">Заголовок модального окна 2</h4>
+					</div>
+					<div class="modal-body">
+						Содержимое модального окна 2...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+						<button type="button" class="btn btn-primary">Сохранить изменения</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <%--<script>--%>
 <%--	$(document).ready(function(){--%>
@@ -49,4 +68,38 @@
 <%--</script>--%>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script src="<c:url value='/resources/js/bank.js' />" type="text/javascript"></script>
+<!-- Bootstrap -->
+<%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>--%>
+
+<script>
+	function sendTestAjax(url,type,data,callback) {
+		$.ajax({
+			url : url,
+			type: type,
+			data : data,
+			success: function (data) {
+				callback(data);
+			}
+		});
+	}
+
+	//function testModalAdd() {
+		// //sendTestAjax('workerModalAdd', 'GET', "", function (html) {
+		// 	//var m = $("#exampleModal");
+		// 	//m.empty();
+		// 	//$.when($('#myModal').append(html)).then(function () {
+		// 		$("#myModalBox").modal('show');
+		// 	//});
+		//
+		// 	// m.html(html).ready(function () {
+		// 	//     $("#exampleModal").modal();
+		// 	// });
+		// //});
+		$(function () {
+			$("#btn2").click(function () {
+				$("#myModal2").modal('show');
+			});
+		});
+	//}
+</script>
 </html>
