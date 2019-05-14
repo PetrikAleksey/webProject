@@ -504,19 +504,19 @@ $('.buttonEdit').on('click',function () {
 });
 //-----------------------------------------------//
 
-function testModalAdd() {
-    sendTestAjax('workerModalAdd', 'GET', "", function (html) {
-        var m = $("#exampleModal");
-        m.empty();
-        $.when($('#exampleModal').append(html)).then(function () {
-            $("#exampleModal").modal();
-        });
-
-        // m.html(html).ready(function () {
-        //     $("#exampleModal").modal();
-        // });
-    });
-}
+// function testModalAdd() {
+//     sendTestAjax('workerModalAdd', 'GET', "", function (html) {
+//         var m = $("#exampleModal");
+//         m.empty();
+//         $.when($('#exampleModal').append(html)).then(function () {
+//             $("#exampleModal").modal();
+//         });
+//
+//         // m.html(html).ready(function () {
+//         //     $("#exampleModal").modal();
+//         // });
+//     });
+// }
 
 //----------------Модальное окно-----------------//
 function addContent() {
