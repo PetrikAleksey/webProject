@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
+@RequestMapping(value="/") //@RequestMapping("/") -  указывает, что этот контроль обрабатывает все URL от корня
 public class BankController {
 
 	@Autowired
